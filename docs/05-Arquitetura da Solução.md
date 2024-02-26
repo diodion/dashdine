@@ -23,7 +23,7 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Modelo ER�
 
 > - [Como fazer um diagrama entidade relacionamento | Lucidchart](https://www.lucidchart.com/pages/pt/como-fazer-um-diagrama-entidade-relacionamento)
 
-## Esquema Relacional
+## Esquema NÃO Relacional
 
 O Esquema Relacional corresponde à representação dos dados em tabelas juntamente com as restrições de integridade e chave primária.
  
