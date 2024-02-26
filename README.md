@@ -1,23 +1,25 @@
-# TÍTULO DO PROJETO
+# DASHDINE
 
-`CURSO`
+`TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS`
 
-`DISCIPLINA`
+`PROJETO: DESENVOLVIMENTO DE UMA APLICAÇÃO DISTRIBUÍDA`
 
-`SEMESTRE`
+`4º EIXO`
 
 Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Diego Ruan Gomes
+* Felipe Massahiro Taguchi Coelho
+* Gabrielly Cristiny Gonçalves Andrade
+* Guilherme Almeida da Cruz Silva
+* Jardel Maldonado da Silva
+* Lizane Farias Rodrigues
 
 ## Orientador
 
-* Nome completo do professor 1
+* Felipe Augusto Lara Soares
 
 ## Instruções de utilização
 
