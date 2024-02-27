@@ -1,9 +1,9 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+O Dash Dine é uma solução para problemas de gestão de comércios alimentícios (restaurantes e lanchonetes). O módulo web faz a gestão do próprio negócio e o módulo mobile fica responsável por captar o pedido do cliente e disponibilizar opção de pagamento.  
 
 ## Problema
-Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
+O principal problema é o custo por porcentagem que os restaurantes enfrentam com aplicativos no mercado. Outro problema que muitos restaurantes enfrentam é a falta de um software personalizado que atenda às necessidades do seu negócio, sendo assim o software seria vendido pelos seguintes modelos de negócio, SaaS: O Software é vendido a um custo inicial (tanto web, quanto mobile), e a gestão do app seria feita com a sua equipe ou pelo sistema de assinatura onde nós ficaríamos responsáveis por fazer a gestão aplicativo além disso ficaríamos responsáveis pela hospedagem dele. 
 
 Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
 
