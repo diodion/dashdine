@@ -82,7 +82,6 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-005| Permitir que o usuário (Cliente) cancele o pedido | ALTA |
 |RF-007| Permitir que o usuário (Cliente) visualize o historico de pedidos | MÉDIA |
 |RF-009| Permitir que o usuário (Cliente) realize o login | ALTA |
-
 |RF-002| Permitir que o usuário (Proprietário) visualize o historico de pedidos | ALTA |
 |RF-004| Permitir que o usuário (Proprietário) faça controle dos pedidos| ALTA |
 
