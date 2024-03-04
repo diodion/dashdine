@@ -19,9 +19,9 @@ As personas levantadas durante o processo de entendimento do problema são apres
 
 #
 
-<img style="margin-top: 40px;" align="left" width="240px" src="https://user-images.githubusercontent.com/98277143/226173982-ea43126c-4f02-42e7-bb60-07e432637880.png">
+## André Fernandes 
 
-## André Fernandes  
+<img style="margin-top: 40px;" align="left" width="240px" src="https://user-images.githubusercontent.com/98277143/226173982-ea43126c-4f02-42e7-bb60-07e432637880.png"> 
 
 ##### Profissão: Recepcionista
 ##### Idade: 25 anos
