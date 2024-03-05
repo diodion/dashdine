@@ -6,6 +6,8 @@
 
 `4º EIXO`
 
+![Logo](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/98277143/e59364de-20a2-4df8-a167-8aa3a383eb76)
+
 Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
 
 ## Integrantes
