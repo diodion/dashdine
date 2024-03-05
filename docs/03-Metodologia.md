@@ -74,7 +74,9 @@ Optamos por 3 branchs para versionamento do projeto sendo a `dev` direcionada ao
 ### Processo
 
 O planejamento foi feito utilizando o Github Projects, com o sistema automatizado Kanban. 
-Nele temos o direcionamento de tarefas já integrado ao issues do github que quando criadas são automaticamente adicionadas a coluna `Backlog` (Limite de 5), após verificadas são direcionadas para a aba `Começar` que são tarefas esperando início. Ao serem iniciadas são movidas para a aba `Em Progresso` (Limite de 6, cada um sempre com uma tarefa) e quando completadas movidas para a coluna de `Revisão` para verificação e finalmente quando completadas para aba `Pronto`.
+
+Nele temos o direcionamento de tarefas já integrado ao issues do github que quando criadas são automaticamente adicionadas a coluna `Backlog` (Limite de 5), após verificadas são direcionadas para a aba `Começar`, que são tarefas esperando início. Ao serem iniciadas são movidas para a aba `Em Progresso` (Limite de 6, cada um sempre com uma tarefa) e quando completadas movidas para a coluna de `Revisão` para verificação e finalmente quando completadas para aba `Pronto`.
+![Captura de tela de 2024-03-04 21-39-27](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/98277143/e2c05cf3-7d47-4670-975f-dc5719daca15)
 
 
 ### Ferramentas
@@ -85,7 +87,8 @@ Nele temos o direcionamento de tarefas já integrado ao issues do github que qua
 | [Visual Studio Code](https://code.visualstudio.com/ "Visual Studio Code") | Editor de código |
 | [Github Desktop](https://desktop.github.com/ "Github Desktop")  | Controle de branchs, merges e commit com integração ao Visual Studio Code   |
 | [Github Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects "Github Projects")  | Utilizado para a gestão do projeto e tarefas no modelo Kanban |
-| [Discord](https://discord.com/ "Discord")  | Reuniões, planejamento do grupo |
+| [Discord](https://discord.com/ "Discord")  | Reuniões e avisos/notas |
+| [Whatsapp](https://www.whatsapp.com/?lang=pt_BR "Whatsapp")   | Planejamento |
 | [Figma](https://www.figma.com/ "Figma") | Desenho de tela (Wireframing) e Diagramas |
 
 O **Visual Studio Code** foi escolhido porque ele possui integração com o **Github Desktop** permitindo visualizar e intercalar o desenvolvimento rapidamente entre os branchs e visualizar commits relevantes.
