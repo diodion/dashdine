@@ -10,8 +10,8 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 
 ## Integrantes
 
+* Antony Leme Novais Ferreira
 * Diego Ruan Gomes
-* Felipe Massahiro Taguchi Coelho
 * Gabrielly Cristiny Gonçalves Andrade
 * Guilherme Almeida da Cruz Silva
 * Jardel Maldonado da Silva

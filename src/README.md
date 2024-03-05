@@ -2,10 +2,20 @@
 
 ## Instalação do Site
 
-O site em HTML/CSS/JS é um projeto estático, logo pode ser utilizado tanto em servidores...
+O Site utiliza para web ReactJS, mobile React Native e Backend NodeJS com Express & MongoDB.
+
+A execução é feita pelo Docker, em cada diretório respectivamente existe uma Dockerfile que com ela criamos o nosso container para execução.
+
+> API: src/backend/Dockerfile
+> Mobile: src/frontend-mobile/Dockerfile
+> Web: src/frontend-web/Dockerfile
+
+Pelo terminal entre no respectivo diretório (Ex: src/frontent-web)
 
 ## Histórico de versões
 
-### [0.1.0] - DD/MM/AAAA
+### [0.1.0] - 03/03/2024
 #### Adicionado
-- Adicionado ...
+- Adicionado estrutura de pastas node, react e react native
+- Adicionado API de login, logout, registro, login persistente com JWT
+- Adicionado esqueleto de design inicial

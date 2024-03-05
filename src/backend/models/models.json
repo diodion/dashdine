@@ -1,0 +1,84 @@
+{
+  "employees": [
+    {
+      "_id": "ObjectId",
+      "employee_id": "String",
+      "name": "String",
+      "email": "String",
+      "password": "String",
+      "role": "String"
+    }
+  ],
+  "menu_items": [
+    {
+      "_id": "ObjectId",
+      "menu_item_id": "String",
+      "name": "String",
+      "description": "String",
+      "price": "Number",
+      "category": "String",
+      "available": "Boolean"
+    }
+  ],
+  "clients": [
+    {
+      "_id": "ObjectId",
+      "client_id": "String",
+      "name": "String",
+      "email": "String",
+      "password": "String",
+      "address": "String",
+      "phone": "String"
+    }
+  ],
+  "orders": [
+    {
+      "_id": "ObjectId",
+      "order_id": "String",
+      "client_id": "ObjectId",
+      "items": [
+        {
+          "menu_item_id": "ObjectId",
+          "quantity": "Number"
+        }
+      ],
+      "total_price": "Number",
+      "order_status": "String",
+      "payment_status": "String",
+      "order_time": "Date",
+      "delivery": {
+        "delivery_status": "String",
+        "estimated_delivery_time": "Date",
+        "actual_delivery_time": "Date"
+      },
+      "reviews": [
+        {
+          "client_id": "ObjectId",
+          "rating": "Number",
+          "comment": "String",
+          "date": "Date"
+        }
+      ]
+    }
+  ],
+  "payments": [
+    {
+      "_id": "ObjectId",
+      "payment_id": "String",
+      "order_id": "ObjectId",
+      "amount": "Number",
+      "payment_method": "String",
+      "payment_status": "String",
+      "payment_time": "Date"
+    }
+  ],
+  "inventory": [
+    {
+      "_id": "ObjectId",
+      "ingredient_id": "String",
+      "name": "String",
+      "quantity": "Number",
+      "unit": "String"
+    }
+  ]
+}
