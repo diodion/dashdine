@@ -48,17 +48,84 @@ Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o 
 
 Apresente aqui uma descrição da sua proposta abordando seus limites e suas ligações com as estratégias e objetivos do negócio. Apresente aqui as oportunidades de melhorias.
 
-### Processo 1 – NOME DO PROCESSO
+### Processo 1 – Fazer Pedido
 
-Apresente aqui o nome e as oportunidades de melhorias para o processo 1. Em seguida, apresente o modelo do processo 1, descrito no padrão BPMN. 
+Abaixo descreve o processo de realizar  o pedido que o cliente irá efetuar através do APP.
 
-![Processo 1](img/02-bpmn-proc1.png)
+![Fluxo Cliente-Fazer Pedido drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/6b299787-8dce-4162-917e-c6e0b748672a)
 
-### Processo 2 – NOME DO PROCESSO
 
-Apresente aqui o nome e as oportunidades de melhorias para o processo 2. Em seguida, apresente o modelo do processo 2, descrito no padrão BPMN.
+### Processo 2 – Visualizar Pedido
 
-![Processo 2](img/02-bpmn-proc2.png)
+Abaixo descreve o processo de visualiazação do  pedido.
+
+![Fluxo Cliente-Visualizar pedidos drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/fa4f2773-0cd0-4140-a39b-daf8ec9d27db)
+
+### Processo 3 – Consultar pedido
+
+Abaixo descreve o processo de consultar pedido realizado.
+
+![Fluxo Cliente-Consultar pedido drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/d30b3888-6bb8-48a9-b486-588fd32e1ba1)
+
+### Processo 4 – Avaliar Pedido
+Abaixo descreve o processo de avaliação  pedido, resaltando a satisfação do cliente.
+
+![Fluxo Cliente-Avaliar Pedido drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/7e104882-94c3-4377-b510-441c219e2b35)
+
+### Processo 5 – Atualizar dados Cadastrais
+
+Abaixo descreve o processo de atualização de  dados do cliente.
+
+![Fluxo Cliente-Atualizar dados cadastrais drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/3d218762-7e44-42b6-ba95-be0f7ca92622)
+
+### Processo 6 – Cancelar Pedido
+
+Abaixo descreve o processo de cancelamento do pedido.
+
+![Fluxo Cliente-Cancelar pedido drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/127d3d33-7903-42e1-b47f-298acf69f791)
+
+### Processo 7 – Repetir Pedido
+
+Abaixo descreve o processo de repetir pedidos já realizados antes.
+
+![Fluxo Cliente-Repetir pedido drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/7db6ee8e-d13b-4cb6-abf8-7b45f5f4512e)
+
+### Processo 8 – Cadastrar Produto
+
+Abaixo descreve o processo de cadastro de produto.
+
+![Fluxo da loja-Cadastrar produto drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/8201351b-3883-4b80-b38b-6fec599ee724)
+
+### Processo 9 – Alterar Produto
+
+Abaixo descreve o processo de alteração de produto.
+
+![Fluxo da loja-Alterar produto drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/4a4bcc0c-d76a-48f9-9c77-1cb41f5f59d2)
+
+### Processo 10 – Ecluir produto
+
+Abaixo descreve o processo de exclução de produto.
+
+![Fluxo da loja-Excluir produto drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/fd2280f5-9a12-4607-a8cd-3293e497ee0e)
+
+### Processo 11 – Aprovar Pedido
+
+Abaixo descreve o processo de aprovação do pedido.
+
+![Fluxo da loja-Aprovar pedido drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/076a189d-a07b-4936-9c64-ed329703d300)
+
+### Processo 12 – Cancelar Pedido
+
+Abaixo descreve o processo de cancelamento do pedido.
+
+![Fluxo da loja-Cancelar pedido drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/fe35e459-c48c-403a-aee7-de5a574f822b)
+
+### Processo 13 – Notificação do Pedido
+
+Abaixo descreve o processo de notificação do andamento do pedido.
+
+![Fluxo da loja-Notificação do pedido drawio](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114541642/8aef013d-09d8-4c98-83a6-be8572940911)
+
 
 ## Indicadores de Desempenho
 
