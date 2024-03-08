@@ -6,7 +6,7 @@ Definição do problema e ideia de solução a partir da perspectiva do usuário
 
 Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
 
-## Personas
+# Personas
 
 As personas levantadas durante o processo de entendimento do problema são apresentadas a seguir:
 
@@ -27,8 +27,21 @@ As personas levantadas durante o processo de entendimento do problema são apres
 ##### Idade: 25 anos
 Recepcionista no hospital público e universitário. Possui sua rotina focada no seu trabalho e principalmente na sua faculdade no período noturno, vem sofrendo frequentemente com a dificuldade nos momentos de intervalo para suas refeições, devido sua rotina apertada, um restaurante que o atendesse com agilidade no pedido seria ideal para ganho de tempo. 
 
+#
 
-## Histórias de Usuários
+## Shanana Nievs
+<img style="margin-top: 40px;" align="left" width="240px" src="https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/70419372/42bfba62-6d5b-4086-9940-0bc44e2f345f">
+
+##### Profissão: Atendente de Restaurante
+##### Idade: 46 anos 
+
+Shanana Nieves é atendente no restaurante de Regina. Devido ao alto fluxo de clientes e ao método de trabalho arcaico acaba enfrentando problemas com as entregas dos pedidos. Sendo desejável um aplicativo onde os pedidos possam ser facilmente consultados de modo que o atendimento seja ágil e prático
+
+
+
+#
+
+# Histórias de Usuários
 
 Com base na análise das personas forma identificadas as seguintes histórias de usuários:
 
@@ -37,7 +50,7 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 |Regina (Proprietária)| Ver os pedidos dos clientes  | Conseguir atendê-los de forma correta e ágil |
 |Regina (Proprietária)| Ver os relatórios de pedidos |Fazer o meu controle de fechamento mensal|
 |André (Cliente)| Um app ou página de web que eu consiga fazer meu pedido | Diminuir o tempo que leva para realizar e retirar meu pedido|
-
+|Shanana (Funcionária)| Ver os pedidos dos clientes  | Conseguir atendê-los de forma ágil |
 ## Modelagem do Processo de Negócio 
 
 ### Análise da Situação Atual
