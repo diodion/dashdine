@@ -1,6 +1,13 @@
 # Introdução
 
-O Dash Dine é uma solução para problemas de gestão de comércios alimentícios (restaurantes e lanchonetes). O módulo web faz a gestão do próprio negócio e o módulo mobile fica responsável por captar o pedido do cliente e disponibilizar opção de pagamento.  
+O Dash Dine é uma solução para problemas de gestão de comércios alimentícios (restaurantes e lanchonetes). O módulo web faz a gestão do próprio negócio e o módulo mobile fica responsável por captar o pedido do cliente e disponibilizar opção de pagamento.  Nossa aplicação procura solucionar os diversos interesses de nossos clientes para que possamos superar os desafios que hoje a gestão tem enfrentado para administrador seus estabelecimentos. Dash Dine possui um ambiente administrativo que o cliente (dono do estabelecimento) pode gerenciar todos seus produtos e os pedidos que os clientes venham a fazer, além de simplificar a experiência do usuário final fazendo com que o aplicativo seja intuitivo e prático para o mesmo.
+
+E pensando no usuário final, que será o principal responsável pelo uso e tráfego do nosso aplicativo contamos com uma aparência muito intuitiva e prática, fazendo com que consiga achar rapidamente seu lanche preferido em poucas etapas. 
+
+Nosso diferencial comparado aos demais players de mercado, é que estamos focados na experiência do usuário final, procurando ser simplicista e prático, para que tenha acesso a todas as informações de forma simples e transparente.
+
+
+
 
 ## Problema
 O principal problema é o custo por porcentagem que os restaurantes enfrentam com aplicativos no mercado. Outro problema que muitos restaurantes enfrentam é a falta de um software personalizado que atenda às necessidades do seu negócio, sendo assim o software seria vendido pelos seguintes modelos de negócio, SaaS: O Software é vendido a um custo inicial (tanto web, quanto mobile), e a gestão do app seria feita com a sua equipe ou pelo sistema de assinatura onde nós ficaríamos responsáveis por fazer a gestão aplicativo além disso ficaríamos responsáveis pela hospedagem dele. 
@@ -18,7 +25,8 @@ Específicos
 
 ## Justificativa
 
-Dash Dine é essencial para diminuir erros nos pedidos, otimizar o tempo de atendimento e realizar o melhor controle de gestão do restaurante. 
+Dash Dine é essencial para diminuir erros nos pedidos, otimizar o tempo de atendimento e realizar o melhor controle de gestão do restaurante.
+O Dash Dine surge como uma resposta aos desafios enfrentados pelos restaurantes no mercado atual. Reconhecemos que o custo por porcentagem imposta pelos aplicativos de entrega pode representar uma carga significativa para os estabelecimentos. Além disso, entendemos que muitos restaurantes têm dificuldade em encontrar um software personalizado que atenda plenamente às suas necessidades operacionais.
 
 ## Público-Alvo
 
