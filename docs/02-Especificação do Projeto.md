@@ -55,12 +55,11 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 
 ### Análise da Situação Atual
 
-Apresente aqui os problemas existentes que viabilizam sua proposta. Apresente o modelo do sistema como ele funciona hoje. Caso sua proposta seja inovadora e não existam processos claramente definidos, apresente como as tarefas que o seu sistema pretende implementar são executadas atualmente, mesmo que não se utilize tecnologia computacional. 
+A análise da situação atual destaca a necessidade de soluções inovadoras e personalizadas para enfrentar os desafios enfrentados pelos restaurantes. Os modelos de negócio do DashDani apresentam uma oportunidade interessante para abordar esses problemas e proporcionar valor agregado aos clientes. No entanto, é crucial continuar monitorando o mercado e adaptando-se às mudanças e demandas dos clientes.
 
 ### Descrição Geral da Proposta
 
-Apresente aqui uma descrição da sua proposta abordando seus limites e suas ligações com as estratégias e objetivos do negócio. Apresente aqui as oportunidades de melhorias.
-
+Há uma crescente demanda por soluções que reduzam custos e aumentem a eficiência operacional dos restaurantes. A personalização do software pode ser um diferencial competitivo importante. A concorrência no mercado de softwares para restaurantes é acirrada, e é essencial garantir que o produto oferecido atenda verdadeiramente às necessidades e expectativas dos clientes.
 ### Processo 1 – Fazer Pedido
 
 Abaixo descreve o processo de realizar  o pedido que o cliente irá efetuar através do APP.
