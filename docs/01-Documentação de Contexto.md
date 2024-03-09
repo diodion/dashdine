@@ -10,12 +10,23 @@ Nosso diferencial comparado aos demais players de mercado, é que estamos focado
 
 
 ## Problema
-O principal problema é o custo por porcentagem que os restaurantes enfrentam com aplicativos no mercado. Outro problema que muitos restaurantes enfrentam é a falta de um software personalizado que atenda às necessidades do seu negócio, sendo assim o software seria vendido pelos seguintes modelos de negócio, SaaS: O Software é vendido a um custo inicial (tanto web, quanto mobile), e a gestão do app seria feita com a sua equipe ou pelo sistema de assinatura onde nós ficaríamos responsáveis por fazer a gestão aplicativo além disso ficaríamos responsáveis pela hospedagem dele. 
+
+Os aplicativos de gestão e pedidos se tornaram uma ferramenta essencial para o sucesso dos restaurantes nos dias de hoje. No entanto, alguns desafios surgem com a utilização dessas plataformas. Um dos principais problemas é o custo por porcentagem que os restaurantes enfrentam, o que pode reduzir significativamente seus lucros. Além disso, a falta de personalização dos aplicativos pode dificultar a comunicação da marca e a fidelização dos clientes.
+
+Para superar esses desafios, surge a necessidade de soluções personalizadas, como o Dash Dine, que atendam às necessidades específicas de cada restaurante. O modelo SaaS (Software as a Service) oferece duas opções vantajosas:
+
+- Compra com custo inicial: O restaurante adquire o software (web e mobile) e gerencia o aplicativo com sua equipe. Essa opção é ideal para quem busca controle total sobre o aplicativo e possui recursos para gerenciá-lo internamente.
+- Assinatura: O restaurante paga um valor mensal e a empresa responsável pelo software se encarrega de toda a gestão do aplicativo, incluindo hospedagem e atualizações. Essa opção é ideal para quem busca praticidade e não possui recursos para gerenciar o aplicativo internamente.
+
+Com um aplicativo personalizado, os restaurantes podem reduzir custos, aumentar a lucratividade e fortalecer sua marca. A escolha do modelo ideal dependerá das necessidades e recursos de cada restaurante.
 
 
 ## Objetivos
 
-O principal objetivo do Dash Dine é suprir as demandas ligadas a problemas com softwares de gestão de restaurantes.  
+
+O Dash Dine foi criado com o objetivo principal de solucionar os problemas que os restaurantes enfrentam com seus softwares de gestão. Através de uma plataforma completa e intuitiva, o Dash Dine oferece diversas funcionalidades que facilitam o dia a dia dos gestores, como controle de estoque, pedidos online, reservas de mesas, relatórios financeiros e muito mais. Além disso, o Dash Dine se destaca pela sua flexibilidade e personalização, podendo ser adaptado às necessidades específicas de cada restaurante.
+
+Com o Dash Dine, os restaurantes podem otimizar seus processos, aumentar a eficiência da gestão e oferecer um atendimento ainda melhor aos seus clientes.  
 
 Específicos
 - Otimizar os ganhos do restaurante 
@@ -25,20 +36,34 @@ Específicos
 
 ## Justificativa
 
-Dash Dine é essencial para diminuir erros nos pedidos, otimizar o tempo de atendimento e realizar o melhor controle de gestão do restaurante.
-O Dash Dine surge como uma resposta aos desafios enfrentados pelos restaurantes no mercado atual. Reconhecemos que o custo por porcentagem imposta pelos aplicativos de entrega pode representar uma carga significativa para os estabelecimentos. Além disso, entendemos que muitos restaurantes têm dificuldade em encontrar um software personalizado que atenda plenamente às suas necessidades operacionais.
+A necessidade de uma solução completa e intuitiva:
+
+O mercado de restaurantes e comércios alimentícios está em constante crescimento e evolução. As demandas dos clientes por um atendimento rápido, eficiente e personalizado, somadas à necessidade de otimizar os processos internos e reduzir custos, exigem que esses negócios busquem soluções tecnológicas inovadoras.
+
+Problemas com softwares de gestão tradicionais:
+
+Os softwares de gestão tradicionais para restaurantes e comércios alimentícios muitas vezes são complexos, pouco intuitivos e não se adaptam às necessidades específicas de cada negócio. Isso pode levar a diversos problemas, como:
+
+Dificuldade na gestão de pedidos e reservas: Processos manuais lentos e trabalhosos, com alto risco de erros.
+Falta de controle de estoque: Perdas de insumos e produtos, além da indisponibilidade de itens para os clientes.
+Dificuldade na geração de relatórios financeiros: Falta de informações precisas e atualizadas sobre o desempenho do negócio.
+Atendimento ao cliente insatisfatório: Tempos de espera longos, falta de informações e dificuldade em atender às solicitações dos clientes.
+O Dash Dine como solução:
+
+O Dash Dine foi criado para solucionar os problemas que os restaurantes e comércios alimentícios enfrentam com seus softwares de gestão tradicionais. A plataforma oferece uma solução completa e intuitiva que visa otimizar os processos e aumentar a eficiência da gestão desses negócios.
+
+Benefícios do Dash Dine:
+
+Simplificação da gestão de pedidos e reservas: Sistema completo para gerenciar pedidos online e reservas de mesas, reduzindo o tempo e o esforço necessário para essas tarefas.
+Melhor controle de estoque: Ferramentas para controlar o estoque de insumos e produtos, ajudando a evitar perdas e garantir a disponibilidade dos itens para os clientes.
+Obtendo relatórios financeiros detalhados: Relatórios financeiros completos e personalizados, que permitem aos gestores acompanhar o desempenho do negócio e tomar decisões mais estratégicas.
+Oferecer um atendimento ainda melhor aos clientes: Atendimento mais rápido, eficiente e personalizado aos clientes.
+
+Conclusão:
+O Dash Dine é a solução ideal para restaurantes e comércios alimentícios que desejam otimizar a gestão do seu negócio, aumentar a eficiência e oferecer um atendimento ainda melhor aos seus clientes. A plataforma oferece uma solução completa, intuitiva e personalizável, que se adapta às necessidades específicas de cada negócio.
 
 ## Público-Alvo
 
-O principal foco é restaurantes e comércios alimentícios que sofrem com a gestão de software atual. 
+O Dash Dine tem como foco principal auxiliar restaurantes e comércios alimentícios que estão enfrentando dificuldades com seus softwares de gestão atuais. A plataforma oferece uma solução completa e intuitiva que visa otimizar os processos e aumentar a eficiência da gestão desses negócios.
 
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações
-hierárquicas, etc.
-
-Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
-
-> **Links Úteis**:
-> - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
-> - [Como definir o público alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
+Em resumo, o Dash Dine é a solução ideal para restaurantes e comércios alimentícios que desejam otimizar a gestão do seu negócio, aumentar a eficiência e oferecer um atendimento ainda melhor aos seus clientes.
