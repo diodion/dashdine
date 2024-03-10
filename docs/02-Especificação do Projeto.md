@@ -11,35 +11,43 @@ Apresente uma visão geral do que será abordado nesta parte do documento, enume
 As personas levantadas durante o processo de entendimento do problema são apresentadas a seguir:
 
 ## Regina Almeida
-<img style="margin-top: 40px;" align="left" width="240px" src="https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t5-statmed/assets/70419372/fcd1eacd-b96e-475c-86c4-2352e225deba">
+<img style="margin-right: 5px;" align="left" width="200px" src="https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2023-2-e3-proj-mov-t5-statmed/assets/70419372/fcd1eacd-b96e-475c-86c4-2352e225deba">
 
-##### Profissão: Proprietária de Restaurante
-##### Idade: 39 anos
+**Profissão: Proprietária de Restaurante**
+
+**Idade: 39 anos**
+
 É dona de um restaurante de sucesso, porém vem sofrendo com a alta demanda pois necessita de um método mais ágil para realizar os atendimentos da sua clientela. Um software que ajudaria na gestão do seu negócio e dos seus pedidos seria essencial pois otimizaria seu tempo e de seus clientes. 
+<br/>
+<br/>
 
-#
+------------
 
-## André Fernandes 
+## André Fernandes
+<img style="margin-right: 5px;" align="left" width="200px" src="https://user-images.githubusercontent.com/98277143/226173982-ea43126c-4f02-42e7-bb60-07e432637880.png"> 
 
-<img style="margin-top: 40px;" align="left" width="240px" src="https://user-images.githubusercontent.com/98277143/226173982-ea43126c-4f02-42e7-bb60-07e432637880.png"> 
+**Profissão: Recepcionista**
 
-##### Profissão: Recepcionista
-##### Idade: 25 anos
+**Idade: 25 anos**
+
 Recepcionista no hospital público e universitário. Possui sua rotina focada no seu trabalho e principalmente na sua faculdade no período noturno, vem sofrendo frequentemente com a dificuldade nos momentos de intervalo para suas refeições, devido sua rotina apertada, um restaurante que o atendesse com agilidade no pedido seria ideal para ganho de tempo. 
+<br/>
+<br/>
 
-#
+------------------------
 
 ## Shanana Nievs
-<img style="margin-top: 40px;" align="left" width="240px" src="https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/70419372/42bfba62-6d5b-4086-9940-0bc44e2f345f">
+<img style="margin-right: 5px;" align="left" width="200px" src="https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/70419372/42bfba62-6d5b-4086-9940-0bc44e2f345f">
 
-##### Profissão: Atendente de Restaurante
-##### Idade: 46 anos 
+**Profissão: Atendente de Restaurante**
+
+**Idade: 46 anos**
 
 Shanana Nieves é atendente no restaurante de Regina. Devido ao alto fluxo de clientes e ao método de trabalho arcaico acaba enfrentando problemas com as entregas dos pedidos. Sendo desejável um aplicativo onde os pedidos possam ser facilmente consultados de modo que o atendimento seja ágil e prático
+<br/>
+<br/>
 
-
-
-#
+------------
 
 # Histórias de Usuários
 
@@ -47,10 +55,13 @@ Com base na análise das personas forma identificadas as seguintes histórias de
 
 |EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
 |--------------------|------------------------------------|----------------------------------------|
-|Regina (Proprietária)| Ver os pedidos dos clientes  | Conseguir atendê-los de forma correta e ágil |
-|Regina (Proprietária)| Ver os relatórios de pedidos |Fazer o meu controle de fechamento mensal|
-|André (Cliente)| Um app ou página de web que eu consiga fazer meu pedido | Diminuir o tempo que leva para realizar e retirar meu pedido|
-|Shanana (Funcionária)| Ver os pedidos dos clientes  | Conseguir atendê-los de forma ágil |
+|Regina (Proprietária)| Ver os pedidos dos clientes  | Verificar tendências para modificar meu menu e promoções |
+|Regina (Proprietária)| Ver os relatórios de pedidos | Fazer o meu controle de fechamento mensal |
+|André (Cliente)| Um aplicativo para fazer pedido a distância | Diminuir o tempo que leva para realizar e retirar meu pedido|
+|André (Cliente)| Um cardápio com informações detalhadas | Verificar minhas opções de compra |
+|Shanana (Funcionária)| Ver os pedidos dos clientes  | Organizar a fila de saída para pedidos  |
+|Shanana (Funcionária)| Verificar se o pedido foi pago ou não  | Agilizar o delivery ou retirada do pedido  |
+
 ## Modelagem do Processo de Negócio 
 
 ### Análise da Situação Atual
@@ -141,12 +152,13 @@ Abaixo descreve o processo de notificação do andamento do pedido.
 
 ## Indicadores de Desempenho
 
-Apresente aqui os principais indicadores de desempenho e algumas metas para o processo. Atenção: as informações necessárias para gerar os indicadores devem estar contempladas no diagrama de classe. Colocar no mínimo 5 indicadores. 
-
-Usar o seguinte modelo: 
-
-![Indicadores de Desempenho](img/02-indic-desemp.png)
-Obs.: todas as informações para gerar os indicadores devem estar no diagrama de classe a ser apresentado a posteriori. 
+|Indicador|Objetivos|Descrição|Cálculo|Fonte de Dados|Perspectiva| 
+|---------|---------|---------|-------|--------------|-----------| 
+|Taxa de reclamação de usuário|Avaliar a quantidade de reclamações de usuários| Percentual de reclamações em relação à quantidade de usuários| | Registro de avaliações de usuários| Usuários| 
+|Total de defeitos detectados|Avaliar a viabilidade da disponibilização de uma versão final do sistema| Quantidade de falhas encontradas durante os testes de software em relação à quantidade de testes realizados| |Tabela de Testes de Software|Desenvolvedores| 
+|Tempo médio entre falhas|Avaliar a frequência da manutenção do sistema|Cálculo do intervalo entre o registro de uma falha e outra nova||Registro de avaliações de usuários|Desenvolvedores| 
+|Taxa de resolução de defeitos|Avaliar a dificuldade de manutenção do software|Calculo do total de defeitos resolvidos em relação ao total de defeitos notificados||Registro de avaliações de usuários|Desenvolvedores| 
+|Tempo médio de reparo|Avaliar a dificuldade da manutenção de software pelo tempo médio entre cada manutenção|Cálculo da média de tempo entre a notificação de uma falha no sistema e a correção dessa falha||Registro de avaliações de usuário|Desenvolvedores| 
 
 ## Requisitos
 
@@ -156,21 +168,26 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário (Cliente) cadastre um pedido | ALTA | 
-|RF-003| Permitir que o usuário (Cliente) edite o pedido em até 5 minutos de realização do pedido| ALTA |
-|RF-005| Permitir que o usuário (Cliente) cancele o pedido | ALTA |
-|RF-007| Permitir que o usuário (Cliente) visualize o historico de pedidos | MÉDIA |
-|RF-009| Permitir que o usuário (Cliente) realize o login | ALTA |
-|RF-002| Permitir que o usuário (Proprietário) visualize o historico de pedidos | ALTA |
-|RF-004| Permitir que o usuário (Proprietário) faça controle dos pedidos| ALTA |
+|RF-001| Permitir que o usuário (Proprietário) visualize o historico de pedidos | MÉDIA |
+|RF-002| Permitir que o usuário (Proprietário) gere relatório de pedidos | MÉDIA |
+|RF-003| Permitir que o usuário (Proprietário) faça controle dos pedidos | ALTA |
+|RF-003| Permitir que o usuário (Proprietário) edite seu  cardápio | ALTA |
+|RF-004| Permitir que o usuário (Proprietário) visualize os mais vendidos | BAIXA |
+|RF-005| Permitir que o usuário (Proprietário) visualize se o pedido foi pago ou não | ALTA |
+|RF-006| Permitir que o usuário (Cliente) realize um pedido | ALTA | 
+|RF-007| Permitir que o usuário (Cliente) cancele um pedido | ALTA |
+|RF-008| Permitir que o usuário (Cliente) visualize o historico de pedidos | BAIXA |
+|RF-009| Permitir que o usuário (Cliente) visualize o cardápio | ALTA |
+|RF-010| Permitir que o usuário (Cliente) adicione itens em seu carrinho | MÉDIA |
+|RF-011| Permitir que o usuário (Cliente) realize o cadastro e login | ALTA |
 
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA |
-|RNF-002| O sistema deve ser responsivo para rodar em um dispositivos desktop | MÉDIA | 
+|RNF-001| O módulo proprietário deverá ser responsivo em dispositivos móveis | BAIXA |
+|RNF-002| O módulo proprietário deverá ser responsivo em dispositivos móveis | MÉDIA | 
 |RNF-003| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
 
 
@@ -181,7 +198,6 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 |ID| Restrição                                             |
 |--|-------------------------------------------------------|
 |01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
 
 ## Diagrama de Casos de Uso
 
@@ -195,13 +211,6 @@ A matriz de rastreabilidade é uma ferramenta usada para facilitar a visualizaç
 A matriz deve contemplar todos os elementos relevantes que fazem parte do sistema, conforme a figura meramente ilustrativa apresentada a seguir.
 
 ![Captura de Tela (1)](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/114194617/47edd56b-cdf8-4af5-ad26-d8e613db8bcb)
-
-
-> **Links Úteis**:
-> - [Artigo Engenharia de Software 13 - Rastreabilidade](https://www.devmedia.com.br/artigo-engenharia-de-software-13-rastreabilidade/12822/)
-> - [Verificação da rastreabilidade de requisitos usando a integração do IBM Rational RequisitePro e do IBM ClearQuest Test Manager](https://developer.ibm.com/br/tutorials/requirementstraceabilityverificationusingrrpandcctm/)
-> - [IBM Engineering Lifecycle Optimization – Publishing](https://www.ibm.com/br-pt/products/engineering-lifecycle-optimization/publishing/)
-
 
 # Gerenciamento de Projeto
 
