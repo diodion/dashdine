@@ -8,7 +8,7 @@
 
 ![Logo](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/98277143/e59364de-20a2-4df8-a167-8aa3a383eb76)
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O Dashdine é uma solução para problemas de gestão de comércios alimentícios (restaurantes e lanchonetes). O módulo web faz a gestão do negócio e o módulo mobile fica responsável por captar o pedidos de clientes e disponibilizar opção de pagamento.  A aplicação possui um ambiente administrativo que o cliente (dono do estabelecimento) pode gerenciar todos seus produtos e os pedidos que os clientes venham a fazer, além de simplificar a experiência do usuário final.
 
 ## Integrantes
 
