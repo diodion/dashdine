@@ -33,6 +33,10 @@ const funcionarioSchema = new Schema({
         type: String,
         required: true
     },
+    empresa: {
+        type: String,
+        required: true
+    },
     supervisor: {
         type: String
     }

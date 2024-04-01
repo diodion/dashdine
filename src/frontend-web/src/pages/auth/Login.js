@@ -61,7 +61,7 @@ function Login() {
             <form className='container_log-form'  onSubmit={handleSubmit}>
                 <div className='container_logo'></div>
                 <div className='container_titulo'>
-                    <p className='titulo_log'>Bem vindo!</p>
+                    <p className='titulo_log'>Boas vindas!</p>
                     <span className='subtitulo'>Algum blablá blá aqui.</span>
                 </div>
                 <div className="input_container">
