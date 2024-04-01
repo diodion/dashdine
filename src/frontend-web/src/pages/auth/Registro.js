@@ -72,6 +72,9 @@ function Registro() {
           <InputPadrao icon={<FaUser/>} id={'sobrenome'} value={data.sobrenome} onChange={(e) => handle(e)} type={'text'} placeholder={'Sobrenome'} required/>
       </div>
       <div className="input_container">
+          <InputPadrao icon={<FaUser/>} id={'sobrenom'} value={data.empresa} onChange={(e) => handle(e)} type={'text'} placeholder={'Empresa'} required/>
+      </div>
+      <div className="input_container">
           <InputPadrao icon={<FaIdCardClip/>} id={'cpf'} value={data.cpf} onChange={(e) => handle(e)} type={'text'} onKeyUpCapture={formatarCPF} onBlur={checaCPF} placeholder={'CPF'} required/>
       </div>
       <div className="input_container">

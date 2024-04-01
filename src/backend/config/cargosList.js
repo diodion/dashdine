@@ -1,7 +1,10 @@
 
 // Lista de cargos, pega os IDs do arquivo ENV.
 const LISTACARGO = {
-    "Usuario": +process.env.REACT_APP_IDUSER,
+    "Cliente": +process.env.REACT_APP_IDCLIENT,
+    "Atendente": +process.env.REACT_APP_IDATED,
+    "Cordenador": +process.env.REACT_APP_IDCORD,
+    "Gerente": +process.env.REACT_APP_IDGERE,
     "Admin": +process.env.REACT_APP_IDADM,
     "Superuser": +process.env.REACT_APP_IDSADM
 }
