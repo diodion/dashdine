@@ -29,6 +29,9 @@ const funcionarioSchema = new Schema({
         type: String,
         required: true
     },
+    telefone: {
+        type: String,
+    },
     email: {
         type: String,
         required: true

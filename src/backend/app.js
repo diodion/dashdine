@@ -20,13 +20,13 @@ app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(express.json());
 // Rotas acessiveis sem cargo ou login
-app.use('/registro', require('./routes/auth/registro'));
-app.use('/refresh', require('./routes/auth/refresh'));
-app.use('/login', require('./routes/auth/login'));
-app.use('/logout', require('./routes/auth/logout'));
+app.use('/registro', require('./routes/client/registro'));
+app.use('/refresh', require('./routes/client/refresh'));
+app.use('/login', require('./routes/client/login'));
+app.use('/logout', require('./routes/client/logout'));
 // Rotas protegidas por cargo e login
 app.use(verificaJWT);
-app.use('/attusuario', require('./routes/admin/attusuario'));
+// app.use('/attusuario', require('./routes/admin/attusuario'));
 
 app.listen(process.env.PORT, function () {
     console.log('Backend Iniciado na porta ' + process.env.PORT)

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const usuarioController = require('../../controllers/usuarioController');
+const usuarioController = require('../../controllers/admin/usuarioController');
 const LISTACARGO = require('../../config/cargosList');
 const verificaCargos = require('../../middleware/verificaCargo');
 const paginacaoMiddleware = require('../../middleware/paginacao');
