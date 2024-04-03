@@ -47,4 +47,4 @@ const funcionarioSchema = new Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Usuario', usuarioSchema);
+module.exports = mongoose.model('Funcionario', funcionarioSchema);
