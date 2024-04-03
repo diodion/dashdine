@@ -2,9 +2,9 @@ const Usuario = require('../../models/Usuario');
 const bcrypt = require('bcryptjs');
 
 const handleNovoUsuario = async (req, res) => {
-    const { senha, nome, sobrenome, cpf, email } = req.body;
+    const { senha, nome, sobrenome, cpf, email, telefone } = req.body;
 
-    if (!senha || !nome || !sobrenome || !cpf || !email) return res.status(400).json({ 'message': 'Preencha todos os campos' });
+    if (!senha || !nome || !sobrenome || !cpf || !email || !telefone) return res.status(400).json({ 'message': 'Preencha todos os campos' });
     // Verifica por registros duplicados no campo usuario, cpf e email.
     const duplicado = await Usuario.findOne({
         $or: [{
@@ -22,6 +22,7 @@ const handleNovoUsuario = async (req, res) => {
             "sobrenome": sobrenome,
             "cpf": cpf,
             "email": email,
+            "telefone": telefone,
             "senha": criptSenha
         });
         console.log(resultado);

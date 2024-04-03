@@ -29,6 +29,9 @@ const funcionarioSchema = new Schema({
         type: String,
         required: true
     },
+    telefone: {
+        type: String,
+    },
     email: {
         type: String,
         required: true
@@ -44,4 +47,4 @@ const funcionarioSchema = new Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Usuario', usuarioSchema);
+module.exports = mongoose.model('Funcionario', funcionarioSchema);
