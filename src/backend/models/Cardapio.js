@@ -13,6 +13,10 @@ const cardapioSchema = new Schema({
     valor: {
         type: String,
         required: true
+    },
+    ativo: {
+        type: Boolean,
+        required: true
     }
 }, {
     timestamps: true

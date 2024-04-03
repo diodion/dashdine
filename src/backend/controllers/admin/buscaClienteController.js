@@ -3,7 +3,7 @@ const Usuario = require('../../models/Usuario');
 const getAllUsuarios = async (req, res) => {
     const pegaUsuarios = await Usuario.find();
     if (!pegaUsuarios) return res.status(204).json({'Mensagem': 'Sem usuários cadastrados'});
-    // Começo middleware de paginação, lembre-se que coloquei a função paginacaoMiddleware la nas rotas
+    // Começo middleware de paginação, Necessário colocar a função paginacaoMiddleware la nas rotas
     const { startIndex, endIndex } = req.paginacao;
     // Cria a variavel usuarios que é o resultado de cada pagina
     const usuarios = pegaUsuarios.slice(startIndex, endIndex);
@@ -38,6 +38,6 @@ const getAllUsuarios = async (req, res) => {
 // }
 
 module.exports = {
-    getAllUsuarios,
+    getAllUsuarios
     // putUsuarios
 }
