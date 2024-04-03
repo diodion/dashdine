@@ -76,8 +76,7 @@ Optamos por 3 branchs para versionamento do projeto sendo a `dev` direcionada ao
 O planejamento foi feito utilizando o Github Projects, com o sistema automatizado Kanban. 
 
 Nele temos o direcionamento de tarefas já integrado ao issues do github que quando criadas são automaticamente adicionadas a coluna `Backlog` (Limite de 5), após verificadas são direcionadas para a aba `Começar`, que são tarefas esperando início. Ao serem iniciadas são movidas para a aba `Em Progresso` (Limite de 6, cada um sempre com uma tarefa) e quando completadas movidas para a coluna de `Revisão` para verificação e finalmente quando completadas para aba `Pronto`.
-![Captura de tela de 2024-03-04 21-39-27](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/98277143/e2c05cf3-7d47-4670-975f-dc5719daca15)
-
+![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/98277143/e9364549-6077-46d7-b907-56a7747f18db)
 
 ### Ferramentas
 
