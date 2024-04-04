@@ -19,15 +19,16 @@ app.use(cookieParser());
 // CORS
 app.use(cors(corsOptions));
 app.use(express.json());
-// Rotas acessiveis sem cargo ou login
+// Rotas acessiveis sem autenticação ou autorização
 app.use('/registro', require('./routes/public/registro'));
 app.use('/refresh', require('./routes/public/refresh'));
 app.use('/login', require('./routes/public/login'));
 app.use('/logout', require('./routes/public/logout'));
+app.use('/cardapio', require('./routes/public/cardapioCliente'));
 
-// Rotas protegidas por cargo e login
+// Rotas protegidas por autenticação e autorização
 app.use(verificaJWT);
-app.use('/caditem', require('./routes/admin/cardapioAdm'));
+app.use('/cardapioadm', require('./routes/admin/cardapioAdm'));
 app.use('/pesquisacliente', require('./routes/admin/pesquisacliente'));
 
 
