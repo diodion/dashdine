@@ -1,7 +1,7 @@
-const Funcionario = require('../../models/Funcionario');
+const Funcionario = require('../models/Funcionario');
 const jwt = require('jsonwebtoken');
 
-const handleaRefreshToken = async (req, res) => {
+const handleAdmRefreshToken = async (req, res) => {
     const cookies = req.cookies;
     console.log(req.cookies);
     if (!cookies?.jwt) return res.sendStatus(401);
@@ -31,4 +31,4 @@ const handleaRefreshToken = async (req, res) => {
     );
 }
 
-module.exports = { handleaRefreshToken }
+module.exports = { handleAdmRefreshToken }

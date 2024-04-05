@@ -1,6 +1,6 @@
-const Funcionario = require('../../models/Funcionario');
+const Funcionario = require('../models/Funcionario');
 
-const handleaLogout = async (req, res) => {
+const handleAdmLogout = async (req, res) => {
     // Deleta o access token para o client também
     const cookies = req.cookies;
     // Retorna 204 caso não possua token para apagar no front
@@ -20,4 +20,4 @@ const handleaLogout = async (req, res) => {
     res.sendStatus(204);
 }
 
-module.exports = { handleaLogout }
+module.exports = { handleAdmLogout }

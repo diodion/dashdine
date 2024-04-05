@@ -62,6 +62,32 @@ const usuarioSchema = new Schema({
             cep: {
                 type: String,
             }
+        },
+        segundo: {
+            nome: {
+                type: String,
+            },
+            logradouro: {
+                type: String,
+            },
+            bairro: {
+                type: String,
+            },
+            numero: {
+                type: String,
+            },
+            referencia: {
+                type: String,
+            },
+            cidade: {
+                type: String,
+            },
+            uf: {
+                type: String,
+            },
+            cep: {
+                type: String,
+            }
 
         }
     }

@@ -16,7 +16,7 @@ const cardapioSchema = new Schema({
     },
     ativo: {
         type: Boolean,
-        required: true
+        default: true
     }
 }, {
     timestamps: true

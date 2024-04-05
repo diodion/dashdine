@@ -1,14 +1,14 @@
-const Funcionario = require('../../models/Funcionario');
+const Usuario = require('../models/Usuario');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const handleaLogin = async (req, res) => {
+const handleLogin = async (req, res) => {
     const { entrada, senha } = req.body;
     if ( !entrada || !senha ) return res.status(400).json({ 'message': 'Preencha todos os campos' });
     
     // TODO: Remover pontos e traços do CPF para permitir login com o mesmo dinamicamente
     // Pega somente o input de entrada no front end e permite login
-    const achaFuncionario = await Funcionario.findOne({
+    const achaUsuario = await Usuario.findOne({
         $or: [{
             'login': entrada
         }, {
@@ -18,16 +18,16 @@ const handleaLogin = async (req, res) => {
         }]
     }).exec();
     // Retorna 401 pro front se não acha 
-    if (!achaFuncionario) return res.sendStatus(401); 
+    if (!achaUsuario) return res.sendStatus(401); 
     // Verifica a senha criptografada com a inserida
-    const permitido = await bcrypt.compare(senha, achaFuncionario.senha);
+    const permitido = await bcrypt.compare(senha, achaUsuario.senha);
     if (permitido) {
-        const cargos = Object.values(achaFuncionario.cargos);
+        const cargos = Object.values(achaUsuario.cargos);
         // Cria o JWT
         const accessToken = jwt.sign(
             {
                 "UserInfo": {
-                    "login": achaFuncionario.entrada,
+                    "login": achaUsuario.entrada,
                     "cargos": cargos
                 }
             },
@@ -35,13 +35,13 @@ const handleaLogin = async (req, res) => {
             { expiresIn: '600s' }
         );
         const refreshToken = jwt.sign(
-            { "login": achaFuncionario.entrada },
+            { "login": achaUsuario.entrada },
             process.env.REFRESH_TOKEN_SECRET,
             { expiresIn: '1d' }
         );
         // salva o refreshToken JWT para o usuário
-        achaFuncionario.refreshToken = refreshToken;
-        const resultado = await achaFuncionario.save();
+        achaUsuario.refreshToken = refreshToken;
+        const resultado = await achaUsuario.save();
         console.log(resultado);
             
         // Dev para teste de API
@@ -55,4 +55,4 @@ const handleaLogin = async (req, res) => {
     }
 }
 
-module.exports = { handleaLogin };
+module.exports = { handleLogin };
