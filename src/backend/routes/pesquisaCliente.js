@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const buscaController = require('../../controllers/admin/buscaclienteController');
-const LISTACARGO = require('../../config/cargosList');
-const verificaCargos = require('../../middleware/verificaCargo');
-const paginacaoMiddleware = require('../../middleware/paginacao');
+const buscaController = require('../controllers/buscaclienteController');
+const LISTACARGO = require('../config/cargosList');
+const verificaCargos = require('../middleware/verificaCargo');
+const paginacaoMiddleware = require('../middleware/paginacao');
 
 router.route('/')
     .get(

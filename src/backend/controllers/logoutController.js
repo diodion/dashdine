@@ -1,4 +1,4 @@
-const Usuario = require('../../models/Usuario');
+const Usuario = require('../models/Usuario');
 
 const handleLogout = async (req, res) => {
     // Deleta o access token para o client também

@@ -42,6 +42,10 @@ const funcionarioSchema = new Schema({
     },
     supervisor: {
         type: String
+    },
+    ativo: {
+        type: Boolean,
+        default: true
     }
 }, {
     timestamps: true

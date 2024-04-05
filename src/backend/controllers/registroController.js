@@ -1,4 +1,4 @@
-const Usuario = require('../../models/Usuario');
+const Usuario = require('../models/Usuario');
 const bcrypt = require('bcryptjs');
 
 const handleNovoUsuario = async (req, res) => {
@@ -31,5 +31,26 @@ const handleNovoUsuario = async (req, res) => {
         res.status(500).json({ 'Mensagem': err.message });
     }
 }
-
-module.exports = { handleNovoUsuario };
+// Atualizar dados
+const atualizaUserDados = async (req, res) => {
+    const id = req.params.id;
+    const { senha, nome, sobrenome, cpf, email, telefone } = req.body;
+    try {
+        const criptSenha = await bcrypt.hash(senha, +process.env.BCRYPT_SALT);
+        const atualizaFunc = await Cardapio.findByIdAndUpdate(id, {             
+        "nome": nome,
+        "sobrenome": sobrenome,
+        "cpf": cpf,
+        "email": email,
+        "empresa": empresa,
+        "telefone": telefone,
+        "senha": criptSenha
+    }, { new: true, runValidators: true});
+        res.send(atualizaFunc);
+        console.log(atualizaFunc)
+    } catch (err) {
+        res.status(500).json({ 'Mensagem': err.message });
+    }
+}
+// Criar Api de cadastro de endereços e atualizações
+module.exports = { handleNovoUsuario, atualizaUserDados};

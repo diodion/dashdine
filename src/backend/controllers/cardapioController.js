@@ -1,5 +1,5 @@
-const Cardapio = require('../../models/Cardapio');
-// Propietario visualizar todos os itens, ativos ou não
+const Cardapio = require('../models/Cardapio');
+// Proprietario visualizar todos os itens, ativos ou não
 const verCardapio = async (req, res) => {
     const cardapio = await Cardapio.find();
     if (!cardapio) return res.status(204).json({ 'Mensagem': 'Sem itens cadastrados no menu' });
@@ -35,11 +35,23 @@ const cadastraCardapio = async (req, res) => {
         res.status(500).json({ 'Mensagem': err.message });
     }
 }
+// Atualizar item pelo id
+const atualizaCardapio = async (req, res) => {
+    const id = req.params.id;
+    const { nome, descricao, valor, ativo } = req?.body;
+    try {
+        const atualizaItem = await Cardapio.findByIdAndUpdate(id, { nome, descricao, valor, ativo }, { new: true, runValidators: true});
+        res.send(atualizaItem);
+        console.log(atualizaItem)
+    } catch (err) {
+        res.status(500).json({ 'Mensagem': err.message });
+    }
+}
 // Para o cliente visualizar itens ativos
 const vercardapioCliente = async (req, res) => {
-    const cardapioCliente = await Cardapio.find({ativo:true});
+    const cardapioCliente = await Cardapio.find({ ativo: true });
     if (!cardapioCliente) return res.status(204).json({ 'Mensagem': 'Sem itens cadastrados no menu' });
     res.json({ cardapioCliente });
 }
 
-module.exports = { verCardapio, vercardapioCliente, cadastraCardapio, deletaCardapio }
+module.exports = { verCardapio, vercardapioCliente, cadastraCardapio, deletaCardapio, atualizaCardapio }
