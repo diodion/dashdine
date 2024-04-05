@@ -5,7 +5,7 @@ const handleNovoFuncionario = async (req, res) => {
     const { senha, nome, sobrenome, cpf, email, telefone, cargos, supervisor } = req.body;
 
     if (!senha || !nome || !sobrenome || !cpf || !email || !telefone) return res.status(400).json({ 'message': 'Preencha todos os campos' });
-    // Verifica por registros duplicados no campo Funcionario, cpf e email.
+    // Verifica por registros duplicados no collection Funcionario para cpf e email.
     const duplicado = await Funcionario.findOne({
         $or: [{
             'cpf': cpf
@@ -83,7 +83,7 @@ const deletaFunc = async (req, res) => {
 
     try {
         const resultado = await Funcionario.findByIdAndDelete(id)
-        res.status(201).json({ 'Sucesso': `Funcionario deletado do cardápio` });
+        res.status(201).json({ 'Sucesso': `Funcionario deletado` });
     } catch (err) {
         res.status(500).json({ 'Mensagem': err.message });
     }

@@ -19,12 +19,15 @@ app.use(cookieParser());
 // CORS
 app.use(cors(corsOptions));
 app.use(express.json());
-// Rotas acessiveis sem autenticação ou autorização
+// # Rotas
+// ##Rotas acessiveis sem autenticação ou autorização
+// ### Autenticação e autorização cliente
 app.use('/registro', require('./routes/registro'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
 app.use('/cardapio', require('./routes/cardapioCliente'));
+// ### Autenticação e autorização Proprietário
 app.use('/loginweb', require('./routes/loginAdm'));
 app.use('/logoutweb', require('./routes/logoutAdm'));
 app.use('/refreshweb', require('./routes/refreshAdm'));
@@ -33,8 +36,12 @@ app.use('/refreshweb', require('./routes/refreshAdm'));
 app.use(verificaJWT);
 app.use('/cardapioadm', require('./routes/cardapioAdm'));
 app.use('/pesquisacliente', require('./routes/pesquisaCliente'));
-app.use('/cadastroweb', require('./routes/cadastroAdm'));
+app.use('/cadastroweb', require('./routes/cadastroAdm')); // Rota cadastro de funcionários - Permitada apenas por Gerente e Administrador
 
 app.listen(process.env.PORT, function () {
-    console.log('Backend Iniciado na porta ' + process.env.PORT)
+    console.log(
+    '\nBackend Iniciado na porta: ' + process.env.PORT + 
+    '\nEndereço frontend permitido pelo CORS: ' + process.env.FRONT_URL_DEV +
+    '\n'
+    )
 });

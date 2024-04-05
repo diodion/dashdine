@@ -5,7 +5,7 @@ const handleNovoUsuario = async (req, res) => {
     const { senha, nome, sobrenome, cpf, email, telefone } = req.body;
 
     if (!senha || !nome || !sobrenome || !cpf || !email || !telefone) return res.status(400).json({ 'message': 'Preencha todos os campos' });
-    // Verifica por registros duplicados no campo usuario, cpf e email.
+    // Verifica por registros duplicados no collection Usuario para cpf e email.
     const duplicado = await Usuario.findOne({
         $or: [{
             'cpf': cpf
