@@ -9,14 +9,36 @@ const pegaUserPedidos = async (req, res) => {
         const id = req.params.id;
         const pegaPedidos = await Pedido.find({ "usuario": id }, "-__v")
             .populate({
-            path: 'itensPedido',
-            select: '-createdAt -updatedAt -ativo -__v'
-        });
-        if (!pegaPedidos) return res.status(204).json({ 'Mensagem': 'Sem pedidos registrados' });
-        const { startIndex, endIndex } = req.paginacao;
-        const pedidos = pegaPedidos.slice(startIndex, endIndex);
+                path: 'itensPedido.itemId',
+                select: '-createdAt -updatedAt -ativo -__v'
+            });
+        if (!pegaPedidos || pegaPedidos.length === 0) return res.status(204).json({ 'Mensagem': 'Sem pedidos registrados' });
 
-        return res.status(200).json({ pedidos, Total: pegaPedidos.length });
+        const pedidosComItens = pegaPedidos.map(pedido => {
+            const pedidoFormatado = pedido.toObject();
+            const detalhesItensUnicos = new Map();
+            pedido.itensPedido.forEach(item => {
+                const itemId = item.itemId._id.toString();
+                if (!detalhesItensUnicos.has(itemId)) {
+                    detalhesItensUnicos.set(itemId, {
+                        itemId: itemId,
+                        quantidade: item.quantidade,
+                        detalhesItem: {
+                            nome: item.itemId.nome,
+                            descricao: item.itemId.descricao,
+                            valor: item.itemId.valor
+                        }
+                    });
+                }
+            });
+            pedidoFormatado.itensPedido = [...detalhesItensUnicos.values()];
+            return pedidoFormatado;
+        });
+
+        const { startIndex, endIndex } = req.paginacao;
+        const pedidos = pedidosComItens.slice(startIndex, endIndex);
+
+        return res.status(200).json({ pedidos, Total: pedidosComItens.length });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: 'Erro interno.' });
@@ -26,19 +48,44 @@ const pegaUserPedidos = async (req, res) => {
 const pegaPedidosConf = async (req, res) => {
     try {
         const pegaPedidos = await Pedido.find({ statusConfirmacao: "Aguardando confirmação" }, "-__v")
-        .populate({
-            path: 'itensPedido',
-            select: '-createdAt -updatedAt -ativo -__v'
-        })
-        .populate({
-            path: 'usuario',
-            select: '-senha -__v -endereco -telefone -cargos -refreshToken -createdAt -updatedAt'
+            .populate({
+                path: 'itensPedido.itemId',
+                select: '-createdAt -updatedAt -ativo -__v'
+            })
+            .populate({
+                path: 'usuario',
+                select: '-senha -__v -endereco -telefone -cargos -refreshToken -createdAt -updatedAt'
+            });
+        if (!pegaPedidos || pegaPedidos.length === 0) return res.status(204).json({ 'Mensagem': 'Sem pedidos aguardando confirmação' });
+        
+        // Mapeia os pedidos para incluir detalhes únicos dos itens de pedido
+        const pedidosComItens = pegaPedidos.map(pedido => {
+            const pedidoFormatado = pedido.toObject();
+            const detalhesItensUnicos = new Map();
+            pedido.itensPedido.forEach(item => {
+                if (item.itemId) { // Verifica se itemId está definido
+                    const itemId = item.itemId._id.toString();
+                    if (!detalhesItensUnicos.has(itemId)) {
+                        detalhesItensUnicos.set(itemId, {
+                            itemId: itemId,
+                            quantidade: item.quantidade,
+                            detalhesItem: {
+                                nome: item.itemId.nome,
+                                descricao: item.itemId.descricao,
+                                valor: item.itemId.valor
+                            }
+                        });
+                    }
+                }
+            });
+            pedidoFormatado.itensPedido = [...detalhesItensUnicos.values()];
+            return pedidoFormatado;
         });
-        if (!pegaPedidos) return res.status(204).json({ 'Mensagem': 'Sem pedidos aguardando confirmação' });
-        const { startIndex, endIndex } = req.paginacao;
-        const pedidos = pegaPedidos.slice(startIndex, endIndex);
 
-        return res.status(200).json({ pedidos, Total: pegaPedidos.length });
+        const { startIndex, endIndex } = req.paginacao;
+        const pedidos = pedidosComItens.slice(startIndex, endIndex);
+
+        return res.status(200).json({ pedidos, Total: pedidosComItens.length });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: 'Erro interno.' });
@@ -49,21 +96,26 @@ const criarPedido = async (req, res) => {
     try {
         const { itensPedido, endereco, telefone, precoTotal, usuario } = req.body;
 
-        // Verifica se os itens do pedido existem no cardápio
-        const itensExistentes = await Cardapio.find({ _id: { $in: itensPedido } });
-        if (itensExistentes.length !== itensPedido.length)  return res.status(400).json({ success: false, error: 'Um ou mais itens do pedido não foram encontrados no cardápio' });
+        const itensExistentes = await Cardapio.find({ _id: { $in: itensPedido.map(item => item.itemId) } });
+        if (itensExistentes.length !== itensPedido.length) return res.status(400).json({ success: false, error: 'Um ou mais itens do pedido não foram encontrados no cardápio' });
 
-        const pedido = await Pedido.create({
-            itensPedido,
+        const invalidQuantities = itensPedido.filter(item => typeof item.quantidade !== 'number' || item.quantidade <= 0);
+        if (invalidQuantities.length > 0) return res.status(400).json({ success: false, error: 'Você está tentando comprar ou vender seu lanche?' });
+
+        const novoPedido = {
+            itensPedido: itensPedido.map(item => ({ itemId: item.itemId, quantidade: item.quantidade })),
             endereco,
             telefone,
             statusPagamento: 'Aguardando pagamento',
             statusConfirmacao: 'Aguardando confirmação',
             precoTotal,
             usuario
-        });
+        };
 
-        res.status(201).json({ success: true, data: pedido, codigo: pedido.codigo }); // Retorna o código do pedido na resposta
+        // Cria o pedido no banco de dados
+        const pedido = await Pedido.create(novoPedido);
+
+        res.status(201).json({ success: true, data: pedido, codigo: pedido.codigo })
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
@@ -75,11 +127,9 @@ const pagarPedido = async (req, res) => {
         const pedido = await Pedido.findById(id, "-__v");
 
         if (!pedido) return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
-        
-        if (pedido.statusPagamento === 'Confirmado') {
-            return res.status(400).json({ success: false, message: 'Este pedido já foi pago anteriormente' });
-        }
-        
+
+        if (pedido.statusPagamento === 'Confirmado') return res.status(400).json({ success: false, message: 'Este pedido já foi pago anteriormente' });
+
         const resultadoPagamento = await processarPagamento(pedido);
 
         if (resultadoPagamento.success) {
@@ -118,14 +168,12 @@ const cancelarPedido = async (req, res) => {
     try {
         const id = req.params.id;
 
-        // Busca o pedido no banco de dados
         const pedido = await Pedido.findById(id);
 
         if (!pedido) {
             return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
         }
 
-        // Atualiza o status de confirmação do pedido para "Cancelado"
         pedido.statusConfirmacao = 'Cancelado';
         await pedido.save();
 
@@ -141,9 +189,7 @@ const liberarPedido = async (req, res) => {
 
         const pedido = await Pedido.findById(id);
 
-        if (!pedido) {
-            return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
-        }
+        if (!pedido) return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
 
         pedido.statusConfirmacao = 'Liberado';
         await pedido.save();
@@ -160,9 +206,7 @@ const informarEmTransito = async (req, res) => {
 
         const pedido = await Pedido.findById(id);
 
-        if (!pedido) {
-            return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
-        }
+        if (!pedido) return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
 
         pedido.statusConfirmacao = 'Em transito';
         await pedido.save();
@@ -179,9 +223,7 @@ const informarEntregue = async (req, res) => {
 
         const pedido = await Pedido.findById(id);
 
-        if (!pedido) {
-            return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
-        }
+        if (!pedido) return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
 
         pedido.statusConfirmacao = 'Entregue';
         await pedido.save();

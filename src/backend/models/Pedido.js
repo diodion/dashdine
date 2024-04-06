@@ -1,15 +1,23 @@
 const mongoose = require('mongoose');
 
+const itemPedidoSchema = mongoose.Schema({
+    itemId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cardapio',
+        required: true
+    },
+    quantidade: {
+        type: Number,
+        required: true
+    }
+});
+
 const pedidoSchema = mongoose.Schema({
     codigo: {
         type: String,
         unique: true
     },
-    itensPedido: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cardapio',
-        required: true
-    }],
+    itensPedido: [itemPedidoSchema],
     endereco: {
         logradouro: {
             type: String,

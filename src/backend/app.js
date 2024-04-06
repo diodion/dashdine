@@ -19,17 +19,17 @@ app.use(cookieParser());
 // CORS
 app.use(cors(corsOptions));
 app.use(express.json());
+
 // Rotas desprotegidas por cargos e autenticação
 app.use('/registro', require('./routes/registro')); // Somente usuários
 app.use('/refresh', require('./routes/refresh'));
 app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
 app.use('/cardapio', require('./routes/cardapioUser'));
-app.use('/pedido', require('./routes/pedido'));
-
 
 // Rotas protegidas por cargos e autenticação
 app.use(verificaJWT);
+app.use('/pedido', require('./routes/pedido'));
 app.use('/minhaconta', require('./routes/usuario'));
 app.use('/cardapioadm', require('./routes/cardapioFunc'));
 app.use('/clienteadm', require('./routes/admUsuario'));

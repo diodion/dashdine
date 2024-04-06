@@ -11,8 +11,6 @@ const userLogin = async (req, res) => {
     // Pega somente o input de entrada no front end e permite login
     const achaUsuario = await Usuario.findOne({
         $or: [{
-            'login': entrada
-        }, {
             'cpf': entrada
         }, {
             'email': entrada
