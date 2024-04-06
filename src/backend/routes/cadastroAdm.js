@@ -4,6 +4,7 @@ const registroController = require('../controllers/admcadastroController');
 const LISTACARGO = require('../config/cargosList');
 const verificaCargos = require('../middleware/verificaCargo');
 
+
 router.route('/')
     .post(
         verificaCargos(

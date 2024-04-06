@@ -8,6 +8,7 @@ const handleLogout = async (req, res) => {
     const refreshToken = cookies.jwt;
     // Verifica se o refreshtoken esta na DB
     const achaUsuario = await Usuario.findOne({ refreshToken }).exec();
+
     if (!achaUsuario) {
         res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
         return res.sendStatus(204);

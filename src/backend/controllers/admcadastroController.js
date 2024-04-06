@@ -2,7 +2,7 @@ const Funcionario = require('../models/Funcionario');
 const bcrypt = require('bcryptjs');
 
 const handleNovoFuncionario = async (req, res) => {
-    const { senha, nome, sobrenome, cpf, email, telefone, cargos, supervisor } = req.body;
+    const { senha, nome, sobrenome, cpf, email, telefone, cargos, supervisor, empresa } = req.body;
 
     if (!senha || !nome || !sobrenome || !cpf || !email || !telefone) return res.status(400).json({ 'message': 'Preencha todos os campos' });
     // Verifica por registros duplicados no collection Funcionario para cpf e email.
@@ -14,7 +14,7 @@ const handleNovoFuncionario = async (req, res) => {
         }]
     }).exec();
     if (duplicado) return res.sendStatus(409);
-
+    
     try {
         const criptSenha = await bcrypt.hash(senha, +process.env.BCRYPT_SALT);
         const resultado = await Funcionario.create({

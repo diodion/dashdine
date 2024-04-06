@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const pedidoSchema = mongoose.Schema({
     itensPedido: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'pedirItem',
+        ref: 'Cardapio',
         required: true,
     }],
     endereco: {
@@ -39,11 +39,13 @@ const pedidoSchema = mongoose.Schema({
         default: 'Aguardando confirmação'
     },
     precoTotal: {
-        type: Number
+        type: Number,
+        required: true
     },
     usuario: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Usuario'
+        ref: 'Usuario',
+        required: True
     },
     dataPedido: {
         type: Date,

@@ -15,9 +15,10 @@ const handleAdmLogout = async (req, res) => {
     // Deleta o refreshtoken da DB e salva
     achaFuncionario.refreshToken = '';
     const resultado = await achaFuncionario.save();
-
+    console.log(resultado);
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
     res.sendStatus(204);
 }
 
 module.exports = { handleAdmLogout }
+
