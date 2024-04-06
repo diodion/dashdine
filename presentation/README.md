@@ -1,3 +1,4 @@
 # Apresentação da Solução
 
-Faça uma apresentação de um resumo de todos o processo de desenvolvimento e no final apresente a solução desenvolvida, usando um pequeno vídeo.
+## Etapa 2
+Vídeo de apresentação das APIs para a etapa 2: [https://youtu.be/akx4FDA-sEQ](https://youtu.be/akx4FDA-sEQ)
