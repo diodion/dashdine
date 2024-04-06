@@ -84,6 +84,7 @@ Nele temos o direcionamento de tarefas já integrado ao issues do github que qua
 | Ferramenta  | Finalidade |
 | ------------ | ------------ |
 | [Visual Studio Code](https://code.visualstudio.com/ "Visual Studio Code") | Editor de código |
+|[Insomnia](https://insomnia.rest/download)| Teste de API|
 | [Github Desktop](https://desktop.github.com/ "Github Desktop")  | Controle de branchs, merges e commit com integração ao Visual Studio Code   |
 | [Github Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects "Github Projects")  | Utilizado para a gestão do projeto e tarefas no modelo Kanban |
 | [Discord](https://discord.com/ "Discord")  | Reuniões e avisos/notas |
