@@ -25,6 +25,8 @@ app.use('/refresh', require('./routes/refresh'));
 app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
 app.use('/cardapio', require('./routes/cardapioUser'));
+app.use('/pedido', require('./routes/pedido'));
+
 
 // Rotas protegidas por cargos e autenticação
 app.use(verificaJWT);
