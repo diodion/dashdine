@@ -19,22 +19,24 @@ app.use(cookieParser());
 // CORS
 app.use(cors(corsOptions));
 app.use(express.json());
-// Rotas acessiveis sem autenticação ou autorização
-app.use('/registro', require('./routes/registro'));
+// Rotas desprotegidas por cargos e autenticação
+app.use('/registro', require('./routes/registro')); // Somente usuários
 app.use('/refresh', require('./routes/refresh'));
 app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
-app.use('/cardapio', require('./routes/cardapioCliente'));
-app.use('/loginweb', require('./routes/loginAdm'));
-app.use('/logoutweb', require('./routes/logoutAdm'));
-app.use('/refreshweb', require('./routes/refreshAdm'));
+app.use('/cardapio', require('./routes/cardapioUser'));
 
-// Rotas protegidas por autenticação e autorização
+// Rotas protegidas por cargos e autenticação
 app.use(verificaJWT);
-app.use('/cardapioadm', require('./routes/cardapioAdm'));
-app.use('/pesquisacliente', require('./routes/pesquisaCliente'));
-app.use('/cadastroweb', require('./routes/cadastroAdm'));
+app.use('/minhaconta', require('./routes/usuario'));
+app.use('/cardapioadm', require('./routes/cardapioFunc'));
+app.use('/clienteadm', require('./routes/admUsuario'));
+app.use('/func', require('./routes/funcionario'));
 
 app.listen(process.env.PORT, function () {
-    console.log('Backend Iniciado na porta ' + process.env.PORT)
+    console.log(
+    '\nBackend Iniciado na porta: ' + process.env.PORT + 
+    '\nEndereço frontend permitido pelo CORS: ' + process.env.FRONT_URL_DEV +
+    '\n'
+    )
 });

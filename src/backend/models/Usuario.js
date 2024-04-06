@@ -7,9 +7,9 @@ const usuarioSchema = new Schema({
         required: true
     },
     cargos: {
-        Usuario: {
+        Cliente: {
             type: Number,
-            default: 1001
+            default: 1005
         },
         Vendedor: Number,
         Admin: Number,
@@ -36,61 +36,16 @@ const usuarioSchema = new Schema({
         type: String,
         required: true
     },
-    endereco: {
-        primeiro: {
-            nome: {
-                type: String,
-            },
-            logradouro: {
-                type: String,
-            },
-            bairro: {
-                type: String,
-            },
-            numero: {
-                type: String,
-            },
-            referencia: {
-                type: String,
-            },
-            cidade: {
-                type: String,
-            },
-            uf: {
-                type: String,
-            },
-            cep: {
-                type: String,
-            }
-        },
-        segundo: {
-            nome: {
-                type: String,
-            },
-            logradouro: {
-                type: String,
-            },
-            bairro: {
-                type: String,
-            },
-            numero: {
-                type: String,
-            },
-            referencia: {
-                type: String,
-            },
-            cidade: {
-                type: String,
-            },
-            uf: {
-                type: String,
-            },
-            cep: {
-                type: String,
-            }
-
-        }
-    }
+    endereco:[{
+        nome: String,
+        logradouro: String,
+        bairro: String,
+        numero: String,
+        referencia: String,
+        cidade: String,
+        uf: String,
+        cep: String
+    }]
 }, {
     timestamps: true
 });

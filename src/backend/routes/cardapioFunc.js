@@ -6,6 +6,12 @@ const verificaCargos = require('../middleware/verificaCargo');
 
 router.route('/')
     .post(
+        verificaCargos(
+            LISTACARGO.Admin,
+            LISTACARGO.Superuser,
+            LISTACARGO.Gerente,
+            LISTACARGO.Cordenador
+        ),
         cardapioAdm.cadastraCardapio)
     .get(
         verificaCargos(
@@ -15,18 +21,24 @@ router.route('/')
             LISTACARGO.Gerente,
             LISTACARGO.Cordenador
         ),
-        cardapioAdm.verCardapio)
+        cardapioAdm.verCardapioFunc)
 
 router.route('/:id')
     .patch(
+        verificaCargos(
+            LISTACARGO.Admin,
+            LISTACARGO.Superuser,
+            LISTACARGO.Gerente,
+            LISTACARGO.Cordenador
+        ),
         cardapioAdm.atualizaCardapio)
-        .delete(
-            verificaCargos(
-                LISTACARGO.Admin,
-                LISTACARGO.Superuser,
-                LISTACARGO.Gerente,
-                LISTACARGO.Cordenador
-            ),
-            cardapioAdm.atualizaCardapio)
+    .delete(
+        verificaCargos(
+            LISTACARGO.Admin,
+            LISTACARGO.Superuser,
+            LISTACARGO.Gerente,
+            LISTACARGO.Cordenador
+        ),
+        cardapioAdm.atualizaCardapio)
 
 module.exports = router;
