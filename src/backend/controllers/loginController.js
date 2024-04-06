@@ -11,8 +11,6 @@ const userLogin = async (req, res) => {
     // Pega somente o input de entrada no front end e permite login
     const achaUsuario = await Usuario.findOne({
         $or: [{
-            'login': entrada
-        }, {
             'cpf': entrada
         }, {
             'email': entrada
@@ -64,15 +62,16 @@ const funcLogin = async (req, res) => {
     // Pega somente o input de entrada no front end e permite login
     const achaFuncionario = await Funcionario.findOne({
         $or: [{
-            'login': entrada
-        }, {
             'cpf': entrada
         }, {
             'email': entrada
-        }]
+        }
+    ]
     }).exec();
     // Retorna 401 pro front se não acha 
-    if (!achaFuncionario) return res.sendStatus(401); 
+    if (!achaFuncionario) return res.sendStatus(401);
+    // Retorna 403 se não estiver ativo
+    if (!achaFuncionario.ativo) return res.status(403).json({ 'message': 'Usuário não está ativo.' });
     // Verifica a senha criptografada com a inserida
     const permitido = await bcrypt.compare(senha, achaFuncionario.senha);
     if (permitido) {

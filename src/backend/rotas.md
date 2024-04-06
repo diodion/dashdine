@@ -31,7 +31,7 @@
 ### Refresh Token
     /refresh/cliente (Get)
 ### Registrar
-    /registro/cliente (Post)
+    /registro (Post)
 ### Atualizar dados/senha
     /minhaconta/dados/:id (Patch > id = id do usuário) (Cargo: Cliente)
 ### Endereços

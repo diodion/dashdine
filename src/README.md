@@ -19,3 +19,6 @@ Pelo terminal entre no respectivo diretório (Ex: src/frontent-web)
 - Adicionado estrutura de pastas node, react e react native
 - Adicionado API de login, logout, registro, login persistente com JWT
 - Adicionado esqueleto de design inicial
+
+### [0.5.0] - 07/04/2024
+- Finalizado API

@@ -23,6 +23,11 @@ router.route('/dados/end/:id/:eid')
         verificaCargos(
             LISTACARGO.Cliente
         ),
-        usuario.deletaEndereco);
+        usuario.deletaEndereco)
+    .patch(
+        verificaCargos(
+            LISTACARGO.Cliente
+        ),
+        usuario.atualizaEndereco);
 
 module.exports = router;

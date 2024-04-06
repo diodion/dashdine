@@ -14,7 +14,7 @@ router.route('/')
         LISTACARGO.Gerente,
         LISTACARGO.Cordenador
         ), 
-    paginacaoMiddleware(1), 
+    paginacaoMiddleware(10), 
     cliente.userBusca);
 
 module.exports = router;
