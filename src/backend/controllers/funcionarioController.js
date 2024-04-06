@@ -39,16 +39,16 @@ const attFuncGerente = async (req, res) => {
     const id = req.params.id; 
     const { nome, sobrenome, cpf, email, cargos, empresa, supervisor, telefone, ativo } = req.body;
     try {
-        const atualizaFunc = await Cardapio.findByIdAndUpdate(id, {             
-        "nome": nome,
-        "sobrenome": sobrenome,
-        "cpf": cpf,
-        "email": email,
-        "cargos": cargos,
-        "empresa": empresa,
-        "supervisor": supervisor,
-        "telefone": telefone,
-        "ativo": ativo
+        const atualizaFunc = await Funcionario.findByIdAndUpdate(id, {             
+        nome,
+        sobrenome,
+        cpf,
+        email,
+        cargos,
+        empresa,
+        supervisor,
+        telefone,
+        ativo
     }, { new: true, runValidators: true});
         res.send(atualizaFunc);
         console.log(atualizaFunc)
@@ -59,16 +59,16 @@ const attFuncGerente = async (req, res) => {
 // Api para o funcionário atualizar os proprios dados
 const attFuncAtd = async (req, res) => {
     const id = req.params.id;
-    const { nome, sobrenome, cpf, email, telefone, senha } = req.body;
+    const { nome, sobrenome, cpf, email, telefone, senha, empresa } = req.body;
     try {
         const criptSenha = await bcrypt.hash(senha, +process.env.BCRYPT_SALT);
-        const atualizaFunc = await Cardapio.findByIdAndUpdate(id, {             
-        "nome": nome,
-        "sobrenome": sobrenome,
-        "cpf": cpf,
-        "email": email,
-        "empresa": empresa,
-        "telefone": telefone,
+        const atualizaFunc = await Funcionario.findByIdAndUpdate(id, {             
+        nome,
+        sobrenome,
+        cpf,
+        email,
+        empresa,
+        telefone,
         "senha": criptSenha
     }, { new: true, runValidators: true} );
         res.send(atualizaFunc);

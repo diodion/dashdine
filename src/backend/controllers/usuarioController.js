@@ -52,13 +52,11 @@ const atualizaUserDados = async (req, res) => {
         res.status(500).json({ 'Mensagem': err.message });
     }
 }
+// cadastro de endereço
 const cadastraEndereco = async (req, res) => {
     const id = req.params.id;
-    const tipoEndereco = req.body.tipoEndereco; // A chave correta é "tipoEndereco" para determinar o tipo do endereço
 
-    // Prepara os dados do novo endereço
     const novoEndereco = {
-        nome: tipoEndereco, // Define o tipo do endereço
         nome: req.body.nome,
         logradouro: req.body.logradouro,
         bairro: req.body.bairro,
@@ -70,22 +68,24 @@ const cadastraEndereco = async (req, res) => {
     };
 
     try {
-        // Atualiza o usuário adicionando o novo endereço ao array de endereços
         const usuarioAtualizado = await Usuario.findByIdAndUpdate(id, { $push: { endereco: novoEndereco } }, { new: true, runValidators: true });
-        res.send(usuarioAtualizado);
-        console.log(usuarioAtualizado);
+
+        const enderecoAdicionado = usuarioAtualizado.endereco.find(endereco => endereco.nome === novoEndereco.nome);
+
+        res.status(201).json({ mensagem: 'Endereço cadastrado com sucesso.', enderecoAdicionado });
     } catch (err) {
         res.status(500).json({ 'Mensagem': err.message });
     }
 }
+// Deleta endereço
 const deletaEndereco = async (req, res) => {
-    const userId = req.params.id;
-    const enderecoId = req.params.eid;
+    const id = req.params.id;
+    const eid = req.params.eid;
 
     try {
-        const usuario = await Usuario.findById(userId);
+        const usuario = await Usuario.findById(id);
         if (!usuario) return res.status(204).json({ mensagem: 'Usuário não encontrado.' });
-        const enderecoIndex = usuario.endereco.findIndex(endereco => endereco._id.toString() === enderecoId);
+        const enderecoIndex = usuario.endereco.findIndex(endereco => endereco._id.toString() === eid);
         if (enderecoIndex === -1) return res.status(204).json({ mensagem: 'Endereço não encontrado.' });
         usuario.endereco.splice(enderecoIndex, 1);
         await usuario.save();
@@ -95,5 +95,36 @@ const deletaEndereco = async (req, res) => {
         res.status(500).json({ mensagem: 'Erro ao excluir o endereço.', error: error.message });
     }
 };
+// Atualiza endereço
+const atualizaEndereco = async (req, res) => {
+    const id = req.params.id;
+    const eid = req.params.eid;
 
-module.exports = { cadastraUser, atualizaUserDados, cadastraEndereco, deletaEndereco };
+    try {
+        const usuario = await Usuario.findById(id);
+        if (!usuario) return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
+        const enderecoIndex = usuario.endereco.findIndex(endereco => endereco._id.toString() === eid);
+        if (enderecoIndex === -1) return res.status(404).json({ mensagem: 'Endereço não encontrado.' });
+
+        // Atualizar o endereço no array
+        usuario.endereco[enderecoIndex] = {
+            _id: usuario.endereco[enderecoIndex]._id,
+            tipo: req.body.tipo,
+            nome: req.body.nome,
+            logradouro: req.body.logradouro,
+            bairro: req.body.bairro,
+            numero: req.body.numero,
+            referencia: req.body.referencia,
+            cidade: req.body.cidade,
+            uf: req.body.uf,
+            cep: req.body.cep
+        };
+        await usuario.save();
+
+        res.status(201).json({ mensagem: 'Endereço atualizado com sucesso.', enderecoAtualizado: usuario.endereco[enderecoIndex] });
+    } catch (error) {
+        res.status(500).json({ mensagem: 'Erro ao atualizar o endereço.', error: error.message });
+    }
+};
+
+module.exports = { cadastraUser, atualizaUserDados, cadastraEndereco, deletaEndereco, atualizaEndereco };

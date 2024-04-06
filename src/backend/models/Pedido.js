@@ -46,11 +46,9 @@ const pedidoSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario',
         required: True
-    },
-    dataPedido: {
-        type: Date,
-        dafault: Date.now
     }
+},{
+    timestamps: true
 })
 
 module.exports = mongoose.model('Pedido', pedidoSchema);
