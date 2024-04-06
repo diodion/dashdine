@@ -19,4 +19,5 @@
 |-----------|------------|
 |[Vscode](https://code.visualstudio.com/)|Necessário para utilização do Thunder Client|
 |[Thunder Client](https://www.thunderclient.com/)|Teste de API|
+|[Insomnia](https://insomnia.rest/download)| Teste de API|
 |[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)|Teste de componentes do React|
