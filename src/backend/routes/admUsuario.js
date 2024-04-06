@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const buscaController = require('../controllers/buscaclienteController');
+const cliente = require('../controllers/clienteController');
 const LISTACARGO = require('../config/cargosList');
 const verificaCargos = require('../middleware/verificaCargo');
 const paginacaoMiddleware = require('../middleware/paginacao');
@@ -15,6 +15,6 @@ router.route('/')
         LISTACARGO.Cordenador
         ), 
     paginacaoMiddleware(1), 
-    buscaController.getAllUsuarios);
+    cliente.userBusca);
 
 module.exports = router;

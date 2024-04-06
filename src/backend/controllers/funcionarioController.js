@@ -1,7 +1,7 @@
 const Funcionario = require('../models/Funcionario');
 const bcrypt = require('bcryptjs');
 
-const handleNovoFuncionario = async (req, res) => {
+const cadastraFunc = async (req, res) => {
     const { senha, nome, sobrenome, cpf, email, telefone, cargos, supervisor, empresa } = req.body;
 
     if (!senha || !nome || !sobrenome || !cpf || !email || !telefone) return res.status(400).json({ 'message': 'Preencha todos os campos' });
@@ -35,7 +35,7 @@ const handleNovoFuncionario = async (req, res) => {
     }
 }
 // Api para o Gerente/Cordenador atualizar os dados do funcionário
-const atualizaFuncGerente = async (req, res) => {
+const attFuncGerente = async (req, res) => {
     const id = req.params.id; 
     const { nome, sobrenome, cpf, email, cargos, empresa, supervisor, telefone, ativo } = req.body;
     try {
@@ -57,7 +57,7 @@ const atualizaFuncGerente = async (req, res) => {
     }
 }
 // Api para o funcionário atualizar os proprios dados
-const atualizaFuncDados = async (req, res) => {
+const attFuncAtd = async (req, res) => {
     const id = req.params.id;
     const { nome, sobrenome, cpf, email, telefone, senha } = req.body;
     try {
@@ -70,7 +70,7 @@ const atualizaFuncDados = async (req, res) => {
         "empresa": empresa,
         "telefone": telefone,
         "senha": criptSenha
-    }, { new: true, runValidators: true});
+    }, { new: true, runValidators: true} );
         res.send(atualizaFunc);
         console.log(atualizaFunc)
     } catch (err) {
@@ -89,4 +89,4 @@ const deletaFunc = async (req, res) => {
     }
 }
 
-module.exports = { handleNovoFuncionario, atualizaFuncGerente, atualizaFuncDados, deletaFunc };
+module.exports = { cadastraFunc, attFuncGerente, attFuncAtd, deletaFunc };
