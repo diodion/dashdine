@@ -4,7 +4,8 @@
 
 Definição de como o software é estruturado em termos dos componentes que fazem parte da solução e do ambiente de hospedagem da aplicação.
 
-![Native (3)](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/97044440/f2f90a80-f6ef-488f-8c36-5db11b99fcc2)
+![Native (4)](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/97044440/a6d0a34d-5a56-41fe-936d-90702f2f35c8)
+
 
 
 ## Diagrama de Classes
