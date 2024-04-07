@@ -7,7 +7,7 @@ const funcionarioSchema = new Schema({
             type: Number,
             default: 2001
         },
-        Cordenador: Number,
+        Coordenador: Number,
         Gerente: Number,
         Admin: Number,
         Superuser: Number

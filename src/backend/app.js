@@ -29,6 +29,7 @@ app.use('/cardapio', require('./routes/cardapioUser'));
 
 // Rotas protegidas por cargos e autenticação
 app.use(verificaJWT);
+app.use('/categoria', require('./routes/categoria'));
 app.use('/pedido', require('./routes/pedido'));
 app.use('/minhaconta', require('./routes/usuario'));
 app.use('/cardapioadm', require('./routes/cardapioFunc'));
