@@ -5,25 +5,25 @@ const paginacaoMiddleware = require('../middleware/paginacao');
 const LISTACARGO = require('../config/cargosList');
 const verificaCargos = require('../middleware/verificaCargo');
 
-router.post('/',
-        verificaCargos(
-            LISTACARGO.Cliente
-        ), 
-        Pedido.criarPedido);
-
-router.route('/pega/:id')
+router.route('/pedidos/vendas/')
     .get(
         verificaCargos(
-            LISTACARGO.Cliente
+            LISTACARGO.Admin,
+            LISTACARGO.Superuser,
+            LISTACARGO.Cordenador,
+            LISTACARGO.Gerente,
         ),
         paginacaoMiddleware(10),
-        Pedido.pegaUserPedidos);
+        Pedido.relatorioVendidos)
 
-router.route('/paga/:id')
-    .post(
+router.route('/pedidos/valores/')
+    .get(
         verificaCargos(
-            LISTACARGO.Cliente
-        ),
-    Pedido.pagarPedido);
+            LISTACARGO.Admin,
+            LISTACARGO.Superuser,
+            LISTACARGO.Cordenador,
+            LISTACARGO.Gerente,
+        )
+    )
 
 module.exports = router;

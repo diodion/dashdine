@@ -34,6 +34,7 @@ app.use('/minhaconta', require('./routes/usuario'));
 app.use('/cardapioadm', require('./routes/cardapioFunc'));
 app.use('/clienteadm', require('./routes/admUsuario'));
 app.use('/func', require('./routes/funcionario'));
+app.use('/relatorios', require('./routes/relatorios'));
 
 app.listen(process.env.PORT, function () {
     console.log(
