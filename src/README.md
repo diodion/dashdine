@@ -22,3 +22,4 @@ Pelo terminal entre no respectivo diretório (Ex: src/frontent-web)
 
 ### [0.5.0] - 07/04/2024
 - Finalizado API
+- Informação das rotas em [rotas](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/blob/main/src/backend/rotas.md)
