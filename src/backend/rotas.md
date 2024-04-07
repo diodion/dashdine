@@ -6,7 +6,7 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
     /login/web (Post)
 ```json
 {
-    "entrada": "email"
+    "entrada": "nome",
     "senha": "123"
 }
 ```
@@ -18,11 +18,11 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
     /func/attdados/:id (Patch > id = id do funcionário. Rota acessível para todos os cargos do modulo web)
 ```json
 {
-    "nome": "email"
-    "sobrenome": "exemplo"
-    "cpf": "000.000.000-42"
-    "email": "email@email.com
-    "telefone": "123"
+    "nome": "nome",
+    "sobrenome": "exemplo",
+    "cpf": "000.000.000-42",
+    "email": "email@email.com",
+    "telefone": "123",
     "senha": "123"
 }
 ```    
@@ -30,37 +30,37 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
     /func/gerenciar/ (Post > Cadastra novos funcionários. Rota acessível para Gerente, Admin, Superuser)
 ```json
 {
-    "nome": "email"
-    "sobrenome": "exemplo"
-    "cpf": "000.000.000-42"
-    "email": "email@email.com
-    "telefone": "123"
-    "empresa": "empresa"
-    "supervisor": "supervisor"
+    "nome": "nome",
+    "sobrenome": "exemplo",
+    "cpf": "000.000.000-42",
+    "email": "email@email.com",
+    "telefone": "123",
+    "empresa": "empresa",
+    "supervisor": "supervisor",
     "cargos": {
-        "Atendente": "123"
-    }
-    "senha": "123"
+        "Atendente": "123" // Não é necessário para o Post, o usuário sempre será criado com Atendente por padrão
+    },
+    "senha": "123",
 }
 ```  
     /func/gerenciar/:id (Patch > Atualiza dados, desativa funcionário. Rota acessível para Gerente, Admin, Superuser)
 ```json
 {
-    "nome": "email"
-    "sobrenome": "exemplo"
-    "cpf": "000.000.000-42"
-    "email": "email@email.com
-    "telefone": "123"
-    "empresa": "empresa"
-    "supervisor": "supervisor"
-    "cargos": {
-        "Atendente": "123"
+    "nome": "nome",
+    "sobrenome": "exemplo",
+    "cpf": "000.000.000-42",
+    "email": "email@email.com",
+    "telefone": "123",
+    "empresa": "empresa",
+    "supervisor": "supervisor",
+    "cargos": { // Pode selecionar qualquer um desses
+        "Atendente": "123",
         "Cordenador": "123",
         "Gerente": "123",
         "Admin": "123",
         "Superuser": "123"
-    }
-    "ativo": true
+    },
+    "ativo": true // Caso false o usuário não conseguirá acessar o sistema
 }
 ```  
     /func/gerenciar/:id (Delete > Deleta funcionário. Rota acessível para Gerente, Admin, Superuser)
@@ -90,11 +90,28 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
 ### Pedidos
     /pedido/conf/pega/ (Get > Visualiza pedidos com status "Aguardando confirmação". Rota acessível para todos os cargos do modulo web)
     /pedido/conf/:id (Patch > id = id do pedido. Muda o campo statusConfirmacao para "Confirmado".Rota acessível para todos os cargos do modulo web.)
-    /pedido/enviado/:id (Patch > id = id do pedido. Muda o campo statusConfirmacao para "Em trânsito".Rota acessível para todos os cargos do modulo web.)
-    /pedido/liberar/:id (Patch > id = id do pedido. Muda o campo statusConfirmacao para "Disponível para retirada".Rota acessível para todos os cargos do modulo web.)
-    /pedido/entregue/:id (Patch > id = id do pedido. Muda o campo statusConfirmacao para "Entregue".Rota acessível para todos os cargos do modulo web e mobile.)
-    /pedido/cancel/:id (Patch > id = id do pedido. Muda o campo statusConfirmacao para "Cancelado".Rota acessível para todos os cargos do modulo web e mobile.)
-
+    /pedido/enviado/:id (Patch > id = id do pedido. Muda o campo statusConfirmacao para "Em trânsito". Rota acessível para todos os cargos do modulo web.)
+    /pedido/liberar/:id (Patch > id = id do pedido. Muda o campo statusConfirmacao para "Disponível para retirada". Rota acessível para todos os cargos do modulo web.)
+    /pedido/entregue/:id (Patch > id = id do pedido. Muda o campo statusConfirmacao para "Entregue". Rota acessível para todos os cargos do modulo web e mobile.)
+    /pedido/cancel/:id (Patch > id = id do pedido. Muda o campo statusConfirmacao para "Cancelado". Rota acessível para todos os cargos do modulo web e mobile.)
+### Relatórios
+    /relatorios/pedidos/vendas (Get > Retorna os itens mais pedidos em uma determinada data e hora, assim como da a opção do usuário selecionar o statusConfirmacao desejado. Rota acessível para Coordenador, Gerente, Admin, Superuser)
+```json
+{
+    "dataInicial": "2024-01-01T00:00:00.000Z",
+    "dataFinal": "2024-04-01T23:59:59.999Z",
+    "status": ["Aguardando confirmação", "Confirmado", "Em transito", "Liberado", "Entregue", "Cancelado"] // Pode ser qualquer um desses ou todos
+}
+```
+    /relatorios/pedidos/ganhos (Get > Retorna o ganho ou soma total dos pedidos vendidos na data e hora selecionados na requisição, assim como da a opção do usuário selecionar o statusConfirmacao desejado. Rota acessível para Coordenador, Gerente, Admin, Superuser)
+```json
+{
+    "dataInicial": "2024-01-01T00:00:00.000Z",
+    "dataFinal": "2024-04-07T23:59:59.999Z",
+    "status": ["Aguardando confirmação", "Confirmado", "Em transito", "Liberado", "Entregue", "Cancelado"] // Pode ser qualquer um desses ou todos
+}
+```
+    
 ## Rotas de cliente
 ### Login
     /login/cliente (Post)
