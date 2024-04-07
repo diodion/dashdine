@@ -37,7 +37,7 @@ router.route('/attdados/:id')
             LISTACARGO.Superuser,
             LISTACARGO.Atendente,
             LISTACARGO.Gerente,
-            LISTACARGO.Cordenador
+            LISTACARGO.Coordenador
         ),
         funcionario.attFuncAtd)
 

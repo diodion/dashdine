@@ -10,20 +10,20 @@ router.route('/pedidos/vendas/')
         verificaCargos(
             LISTACARGO.Admin,
             LISTACARGO.Superuser,
-            LISTACARGO.Cordenador,
+            LISTACARGO.Coordenador,
             LISTACARGO.Gerente,
         ),
         paginacaoMiddleware(10),
-        Pedido.relatorioVendidos)
+        Pedido.relatorioVendidos);
 
-router.route('/pedidos/valores/')
+router.route('/pedidos/ganhos/')
     .get(
         verificaCargos(
             LISTACARGO.Admin,
             LISTACARGO.Superuser,
-            LISTACARGO.Cordenador,
+            LISTACARGO.Coordenador,
             LISTACARGO.Gerente,
-        )
-    )
+        ),
+    Pedido.relatorioGanhos);
 
 module.exports = router;

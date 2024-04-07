@@ -12,7 +12,7 @@ router.route('/')
         LISTACARGO.Superuser, 
         LISTACARGO.Atendente,
         LISTACARGO.Gerente,
-        LISTACARGO.Cordenador
+        LISTACARGO.Coordenador
         ), 
     paginacaoMiddleware(10), 
     cliente.userBusca);

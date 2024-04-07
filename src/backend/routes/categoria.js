@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const cardapioAdm = require('../controllers/cardapioController');
+const Categoria = require('../controllers/categoriaController');
 const LISTACARGO = require('../config/cargosList');
 const verificaCargos = require('../middleware/verificaCargo');
 
@@ -12,7 +12,7 @@ router.route('/')
             LISTACARGO.Gerente,
             LISTACARGO.Coordenador
         ),
-        cardapioAdm.cadastraCardapio)
+        Categoria.cadastraCategoria)
     .get(
         verificaCargos(
             LISTACARGO.Admin,
@@ -21,7 +21,7 @@ router.route('/')
             LISTACARGO.Gerente,
             LISTACARGO.Coordenador
         ),
-        cardapioAdm.verCardapioFunc)
+        Categoria.verCategoria)
     .delete(
         verificaCargos(
             LISTACARGO.Admin,
@@ -30,7 +30,7 @@ router.route('/')
             LISTACARGO.Gerente,
             LISTACARGO.Coordenador
         ),
-        cardapioAdm.deletaMultiCardapio)
+        Categoria.deletaCategoria)
 
 router.route('/:id')
     .patch(
@@ -40,14 +40,6 @@ router.route('/:id')
             LISTACARGO.Gerente,
             LISTACARGO.Coordenador
         ),
-        cardapioAdm.atualizaCardapio)
-    .delete(
-        verificaCargos(
-            LISTACARGO.Admin,
-            LISTACARGO.Superuser,
-            LISTACARGO.Gerente,
-            LISTACARGO.Coordenador
-        ),
-        cardapioAdm.atualizaCardapio)
+        Categoria.atualizaCategoria)
 
 module.exports = router;

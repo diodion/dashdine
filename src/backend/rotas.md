@@ -55,7 +55,7 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
     "supervisor": "supervisor",
     "cargos": { // Pode selecionar qualquer um desses
         "Atendente": "123",
-        "Cordenador": "123",
+        "Coordenador": "123",
         "Gerente": "123",
         "Admin": "123",
         "Superuser": "123"
@@ -65,11 +65,12 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
 ```  
     /func/gerenciar/:id (Delete > Deleta funcionário. Rota acessível para Gerente, Admin, Superuser)
 ### Administração de cardápio
-    /cardapioadm/ (Post > Adiciona itens no cardáio. Rota acessível para Coordenador, Gerente, Admin, Superuser)
+    /cardapioadm/ (Post > Adiciona um ou vários itens no cardápio, para vários tratar como Array. Rota acessível para Coordenador, Gerente, Admin, Superuser)
 ```json
 {
     "nome": "X-Salada",
     "descricao": "X-Salada Completo",
+    "categoria": "_id da categoria",
     "valor": "5,00",
     "ativo": true
 }
@@ -80,11 +81,31 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
 {
     "nome": "X-Salada",
     "descricao": "X-Salada Completo",
+    "categoria": "_id da categoria",
     "valor": "5,00",
     "ativo": true
 }
 ```
-    /cardapioadm/:id (Delete > id = id do item do cardápio. Deleta  o item do cardápio. Rota acessível para Coordenador, Gerente, Admin, Superuser)
+    /cardapioadm/:id (Delete > id = id do item do cardápio. Deleta o item do cardápio pelo id. Rota acessível para Coordenador, Gerente, Admin, Superuser)
+    /cardapioadm/ (Delete > Deleta multiplos itens do cardápio a partis dos ids. Rota acessível para Coordenador, Gerente, Admin, Superuser)
+```json
+{
+    "ids": ["id_do_item_1", "id_do_item_2", "id_do_item_3"]
+}
+```
+#### Categorias
+    /categoria/ (Post > Adiciona uma ou várias categorias, para vários tratar como Array. Rota acessível para Coordenador, Gerente, Admin, Superuser)
+```json
+{
+    "nome": "X-Salada",
+    "descricao": "X-Salada Completo",
+    "ativo": true
+}
+```
+    /categoria/ (Get > Visualiza categorias. Rota acessível para todos os cargos do modulo web)
+    /categoria/:id (Patch > id = id do item da categoria. Atualiza a categoria. Rota acessível para Coordenador, Gerente, Admin, Superuser)
+    /categoria/ (Delete > id = id do da categoria. Deleta o item do cardápio pelo id. Rota acessível para Coordenador, Gerente, Admin, Superuser)
+
 ### Administração de clientes
     /clienteadm (Get > Pega todos clientes cadastrados) 
 ### Pedidos
@@ -185,11 +206,11 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
 {
     "itensPedido": [
     {
-        "itemId": "660de9ef54a1e83188194e4e",
+        "itemId": "_id do item",
         "quantidade": 2
     },
     {
-        "itemId": "66116ebd21605ca04283983b",
+        "itemId": "_id do item 2",
         "quantidade": 1
     }
     ],
@@ -204,7 +225,7 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
     },
     "telefone": "22222222",
     "precoTotal": 50.00,
-    "usuario": "6611c597e3dbd5d246454431"
+    "usuario": "_id do usário efetuando a compra"
 }
 ```
     /pedido/paga/:id (Post > Efetua a simulação do pagamento do pedido. id = id do pedido. Muda o campo statusPagamento para "Confirmado") (Cargo: Cliente)

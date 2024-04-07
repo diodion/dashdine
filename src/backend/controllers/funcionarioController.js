@@ -34,7 +34,7 @@ const cadastraFunc = async (req, res) => {
         res.status(500).json({ 'Mensagem': err.message });
     }
 }
-// Api para o Gerente/Cordenador atualizar os dados do funcionário
+// Api para o Gerente/Coordenador atualizar os dados do funcionário
 const attFuncGerente = async (req, res) => {
     const id = req.params.id; 
     const { nome, sobrenome, cpf, email, cargos, empresa, supervisor, telefone, ativo } = req.body;

@@ -18,7 +18,7 @@ router.route('/conf/pega/')
             LISTACARGO.Superuser,
             LISTACARGO.Atendente,
             LISTACARGO.Gerente,
-            LISTACARGO.Cordenador
+            LISTACARGO.Coordenador
         ),
         paginacaoMiddleware(10),
         Pedido.pegaPedidosConf)
@@ -44,7 +44,7 @@ router.patch('/conf/:id',
         LISTACARGO.Superuser,
         LISTACARGO.Atendente,
         LISTACARGO.Gerente,
-        LISTACARGO.Cordenador),
+        LISTACARGO.Coordenador),
     Pedido.confirmarPedido);
 
 router.patch('/cancel/:id',
@@ -54,7 +54,7 @@ router.patch('/cancel/:id',
         LISTACARGO.Superuser,
         LISTACARGO.Atendente,
         LISTACARGO.Gerente,
-        LISTACARGO.Cordenador),
+        LISTACARGO.Coordenador),
     Pedido.cancelarPedido);
 
 router.patch('/liberar/:id',
@@ -63,7 +63,7 @@ router.patch('/liberar/:id',
         LISTACARGO.Superuser,
         LISTACARGO.Atendente,
         LISTACARGO.Gerente,
-        LISTACARGO.Cordenador),
+        LISTACARGO.Coordenador),
     Pedido.liberarPedido);
 
 router.patch('/enviado/:id',
@@ -72,7 +72,7 @@ router.patch('/enviado/:id',
         LISTACARGO.Superuser,
         LISTACARGO.Atendente,
         LISTACARGO.Gerente,
-        LISTACARGO.Cordenador),
+        LISTACARGO.Coordenador),
     Pedido.informarEmTransito);
 
 router.patch('/entregue/:id',
@@ -81,7 +81,7 @@ router.patch('/entregue/:id',
         LISTACARGO.Superuser,
         LISTACARGO.Atendente,
         LISTACARGO.Gerente,
-        LISTACARGO.Cordenador),
+        LISTACARGO.Coordenador),
     Pedido.informarEntregue);
 
 module.exports = router;
