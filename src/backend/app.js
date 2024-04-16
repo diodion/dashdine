@@ -7,7 +7,6 @@ const credenciais = require('./middleware/credenciais');
 const corsOptions = require('./config/corsOptions')
 const verificaJWT = require('./middleware/verificaJWT');
 const cookieParser = require('cookie-parser');
-const LISTACARGO = require('./config/cargosList');
 // Conecta banco de dados
 dbConecta();
 // Verifica as opções de credenciais e cookies antes do CORS
@@ -20,14 +19,14 @@ app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Rotas desprotegidas por cargos e autenticação
+// Rotas desprotegidas
 app.use('/registro', require('./routes/registro')); // Somente usuários
 app.use('/refresh', require('./routes/refresh'));
 app.use('/login', require('./routes/login'));
 app.use('/logout', require('./routes/logout'));
 app.use('/cardapio', require('./routes/cardapioUser'));
 
-// Rotas protegidas por cargos e autenticação
+// Rotas protegidas
 app.use(verificaJWT);
 app.use('/categoria', require('./routes/categoria'));
 app.use('/pedido', require('./routes/pedido'));

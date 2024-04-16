@@ -44,25 +44,6 @@ const deletaMultiCardapio = async (req, res) => {
         res.status(500).json({ "Erro": err.message });
     }
 }
-// Cadastrar um item
-// const cadastraCardapio = async (req, res) => {
-//     const { nome, descricao, valor, categoria, ativo } = req.body;
-//     if (!nome || !descricao || !valor) return res.status(400).json({ "Atenção": "Preencha todos os campos" });
-//     try {
-//         const categoriaExiste = await Categoria.findById(categoria);
-//         if (!categoriaExiste) return res.status(404).json({ "Atenção": "Categoria não encontrada" });
-//         await Cardapio.create({
-//             nome,
-//             descricao,
-//             valor,
-//             categoria,
-//             ativo
-//         });
-//         res.status(201).json({ "Sucesso": `Item ${nome} registrado com sucesso no cardápio` });
-//     } catch (err) {
-//         res.status(500).json({ "Erro": err.message });
-//     }
-// }
 // Cadastra um ou vários itens
 const cadastraCardapio = async (req, res) => {
     const items = req.body;

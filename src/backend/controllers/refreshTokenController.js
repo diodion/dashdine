@@ -17,10 +17,12 @@ const userRefresht = async (req, res) => {
         (err, decoded) => {
             if (err || achaUsuario.entrada !== decoded.entrada) return res.sendStatus(403);
             const cargos = Object.values(achaUsuario.cargos);
+            const id = Object.values(achaUsuario._id);
             const accessToken = jwt.sign(
                 {
-                    "UserInfo": {
-                        "login": decoded.entrada,
+                    "Info": {
+                        "id": id,
+                        "entrada": decoded.entrada,
                         "cargos": cargos
                     }
                 },
@@ -47,10 +49,12 @@ const funcRefresht = async (req, res) => {
         (err, decoded) => {
             if (err || achaFuncionario.entrada !== decoded.entrada) return res.sendStatus(403);
             const cargos = Object.values(achaFuncionario.cargos);
+            const id = Object.values(achaFuncionario._id);
             const accessToken = jwt.sign(
                 {
-                    "UserInfo": {
-                        "login": decoded.entrada,
+                    "Info": {
+                        "id": id,
+                        "entrada": decoded.entrada,
                         "cargos": cargos
                     }
                 },

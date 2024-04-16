@@ -5,7 +5,7 @@ const corsOptions = {
         if (origensPermitidas.indexOf(origin) !== -1 || !origin) {
             callback(null, true)
         } else {
-            callback(new Error('Bloqueado pelo CORS'));
+            callback(new Error("Bloqueado pelo CORS"));
         }
     },
     credentials: true,
