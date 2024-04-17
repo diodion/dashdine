@@ -171,15 +171,18 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-001| Permitir que o usuário (Proprietário) visualize o historico de pedidos | MÉDIA |
 |RF-002| Permitir que o usuário (Proprietário) gere relatório de pedidos | MÉDIA |
 |RF-003| Permitir que o usuário (Proprietário) faça controle dos pedidos | ALTA |
-|RF-003| Permitir que o usuário (Proprietário) edite seu  cardápio | ALTA |
-|RF-004| Permitir que o usuário (Proprietário) visualize os mais vendidos | BAIXA |
-|RF-005| Permitir que o usuário (Proprietário) visualize se o pedido foi pago ou não | ALTA |
-|RF-006| Permitir que o usuário (Cliente) realize um pedido | ALTA | 
-|RF-007| Permitir que o usuário (Cliente) cancele um pedido | ALTA |
-|RF-008| Permitir que o usuário (Cliente) visualize o historico de pedidos | BAIXA |
-|RF-009| Permitir que o usuário (Cliente) visualize o cardápio | ALTA |
-|RF-010| Permitir que o usuário (Cliente) adicione itens em seu carrinho | MÉDIA |
-|RF-011| Permitir que o usuário (Cliente) realize o cadastro e login | ALTA |
+|RF-004| Permitir que o usuário (Proprietário) gerencie seu  cardápio | ALTA |
+|RF-005| Permitir que o usuário (Proprietário) crie e gerencie categorias | MEDIA |
+|RF-006| Permitir que o usuário (Proprietário) visualize os itens mais vendidos | BAIXA |
+|RF-007| Permitir que o usuário (Proprietário) visualize se o pedido foi pago | ALTA |
+|RF-008| Permitir que o usuário (Proprietário) crie relatório de ganhos brutos | MEDIA |
+|RF-009| Permitir que o usuário (Proprietário) cadastre e gerencie funcionários | ALTA|
+|RF-010| Permitir que o usuário (Cliente) realize um pedido | ALTA | 
+|RF-011| Permitir que o usuário (Cliente) cancele um pedido | ALTA |
+|RF-012| Permitir que o usuário (Cliente) visualize o historico de pedidos | BAIXA |
+|RF-013| Permitir que o usuário (Cliente) visualize o cardápio | ALTA |
+|RF-014| Permitir que o usuário (Cliente) adicione itens em seu carrinho | MÉDIA |
+|RF-015| Permitir que o usuário (Cliente) realize o cadastro e login | ALTA |
 
 
 ### Requisitos não Funcionais
