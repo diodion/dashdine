@@ -289,8 +289,27 @@ const relatorioVendidos = async (req, res) => {
         // Filtrar os itens nulos da lista final... Evita alguns erros
         const itensValidos = itensMaisVendidos.filter(item => item !== null);
 
-        const itensMaisVendidosDetalhados = await Promise.all(itensValidos);
-
+        const itensMaisVendidosDetalhados = await Promise.all(itensValidos.map(async (item) => {
+            try {
+                const cardapioItem = await Cardapio.findById(item.itemId);
+                if (cardapioItem) {
+                    return {
+                        itemId: {
+                            nome: cardapioItem.nome,
+                            descricao: cardapioItem.descricao,
+                            valor: cardapioItem.valor,
+                            ativo: cardapioItem.ativo
+                        },
+                        quantidade: item.quantidade
+                    };
+                }
+                return null;
+            } catch (error) {
+                console.error(`Erro ao buscar o item no Cardápio com o ID ${item.itemId}:`, error);
+                return null;
+            }
+        }));
+        
         const { startIndex, endIndex } = req.paginacao;
 
         const resultadosPaginados = itensMaisVendidosDetalhados.slice(startIndex, endIndex);

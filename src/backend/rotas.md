@@ -232,3 +232,18 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
     /pedido/pega/:id (Get > Retorna o histórico de pedidos do usuário. id = id do usuário) (Cargo: Cliente)
     /pedido/entregue/:id (Patch > id = id do pedido. Muda o campo statusConfirmacao para "Entregue".Rota acessível para todos os cargos do modulo web e mobile.)
     /pedido/cancel/:id (Patch > id = id do pedido. Muda o campo statusConfirmacao para "Cancelado".Rota acessível para todos os cargos do modulo web e mobile.)
+
+## Executando via docker
+
+Com o docker já configurando e as variaveis de ambiente configuradas em sua máquina no arquivo .env do nosso diretório efetue os passos:
+
+1 - No diretório do backend (src/backend) execute o segundo comando:
+    
+    docker build -t dashdine/api:1.0 .
+
+Não esqueça do . no final.
+
+2 - Em seguida execute o comando para dar inicio a nossa API
+    docker run --name dashdine -p 3030:3030 dashdine/api:1.0
+
+Pronto! Caso modifique a porta apenas troque o 3030 pela porta desejada.
