@@ -47,7 +47,7 @@ const pegaUserPedidos = async (req, res) => {
 // Pega pedidos com status em confirmação
 const pegaPedidosConf = async (req, res) => {
     try {
-        const pegaPedidos = await Pedido.find({ statusConfirmacao: "Aguardando confirmação" }, "-__v")
+        const pegaPedidos = await Pedido.find({}, "-__v")
             .populate({
                 path: 'itensPedido.itemId',
                 select: '-createdAt -updatedAt -ativo -__v'
