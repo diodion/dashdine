@@ -13,10 +13,18 @@ interface EditProductDTO {
   valor: string,
   ativo: boolean
 }
+interface CreateProductDTO {
+  nome: string,
+  descricao: string,
+  categoria: string,
+  valor: string,
+  ativo: boolean
+}
 interface UseCardapioReturn {
   produtos: Produto[] | undefined
   edit: UseMutateFunction<any, Error, EditProductDTO, unknown>
   remove: UseMutateFunction<any, Error, RemoveProductDTO, unknown>
+  create: UseMutateFunction<any, Error, CreateProductDTO, unknown>
 }
 
 interface UseCardapio {
@@ -36,7 +44,10 @@ const useCardapio: UseCardapio = () => {
     async ({ id }: RemoveProductDTO) => api.delete(`/cardapioadm/${id}`).then((res) => res.data),
     [api],
   );
-
+  const createProduct = useCallback(
+    async (params: CreateProductDTO) => api.post(`/cardapioadm`, params).then((res) => res.data),
+    [api],
+  );
   const editProduct = useCallback(
     async ({ id, ...body }: EditProductDTO) => api.patch(`/cardapioadm/${id}`, { body }).then((res) => res.data),
     [api],
@@ -47,6 +58,10 @@ const useCardapio: UseCardapio = () => {
     queryFn: getCardapio(),
   });
 
+  const createMutation = useMutation({
+    mutationFn: createProduct,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['produtos'] }),
+  });
   const editMutation = useMutation({
     mutationFn: editProduct,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['produtos'] }),
@@ -59,7 +74,8 @@ const useCardapio: UseCardapio = () => {
   return {
     produtos: query.data,
     edit: editMutation.mutateAsync,
-    remove: removeMutation.mutateAsync
+    remove: removeMutation.mutateAsync,
+    create: createMutation.mutateAsync
   }
 }
 

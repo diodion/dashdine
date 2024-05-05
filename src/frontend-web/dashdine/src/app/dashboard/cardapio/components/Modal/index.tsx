@@ -1,6 +1,7 @@
+import useCardapio from '@/hooks/use-cardapio';
 import useCategorias from '@/hooks/use-categorias';
 import { Button, Checkbox, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Stack, useDisclosure } from '@chakra-ui/react';
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
 
 interface Props {
   isOpen: boolean,
@@ -17,6 +18,7 @@ const ProdutoModal: React.FC<Props> = function ({
 }) {
 
   const { categorias } = useCategorias();
+  const { create } = useCardapio();
   const fields = [
     {
       name: 'nome',
@@ -37,6 +39,27 @@ const ProdutoModal: React.FC<Props> = function ({
     }
   ]
 
+  const [creating, setCreating] = useState(false);
+
+  const handleAddProduct = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const nome = form.get('nome')?.toString();
+    const descricao = form.get('descricao')?.toString();
+    const categoria = form.get('categoria')?.toString();
+    const valor = form.get('valor')?.toString();
+    const ativo = !!form.get('ativo')?.toString();
+
+    const categoriaId = categorias?.find(c => c.nome === categoria)?._id;
+
+    if(!(nome && descricao && categoriaId && valor)) return;
+
+    setCreating(true);
+    await create({nome, descricao, categoria: categoriaId, valor, ativo});
+    setCreating(false);
+
+  }
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -44,8 +67,8 @@ const ProdutoModal: React.FC<Props> = function ({
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
+            <form onSubmit={e => handleAddProduct(e)}>
           <ModalBody>
-            <form>
               <Stack gap='24px'>
                 {
                   fields.map(field => (
@@ -72,15 +95,15 @@ const ProdutoModal: React.FC<Props> = function ({
                   </Checkbox>
                 </FormControl>
               </Stack>
-            </form>
           </ModalBody>
 
           <ModalFooter>
             <Button variant='ghost' onClick={onClose}>Cancelar</Button>
-            <Button colorScheme='blue' ml={3}>
+            <Button type='submit' colorScheme='blue' ml={3} isLoading={creating}>
               Salvar
             </Button>
           </ModalFooter>
+            </form>
         </ModalContent>
       </Modal>
     </>

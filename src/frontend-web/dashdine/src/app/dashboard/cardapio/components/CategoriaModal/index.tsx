@@ -1,5 +1,6 @@
+import useCategorias from '@/hooks/use-categorias';
 import { Button, Checkbox, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Stack, useDisclosure } from '@chakra-ui/react';
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
 
 interface Props {
   isOpen: boolean,
@@ -13,6 +14,7 @@ const CategoriaModal: React.FC<Props> = function ({
   onClose,
 }) {
 
+  const { create } = useCategorias();
   const fields = [
     {
       name: 'nome',
@@ -24,6 +26,22 @@ const CategoriaModal: React.FC<Props> = function ({
     },
   ]
 
+  const [creating, setCreating] = useState(false);
+
+  const handleAddProduct = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const nome = form.get('nome')?.toString();
+    const descricao = form.get('descricao')?.toString();
+
+    if(!(nome && descricao)) return;
+
+    setCreating(true);
+    await create({nome, descricao});
+    setCreating(false);
+
+  }
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -31,8 +49,8 @@ const CategoriaModal: React.FC<Props> = function ({
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
             <form>
+          <ModalBody>
               <Stack gap='24px'>
                 {
                   fields.map(field => (
@@ -51,15 +69,15 @@ const CategoriaModal: React.FC<Props> = function ({
                   </Checkbox>
                 </FormControl>
               </Stack>
-            </form>
           </ModalBody>
 
           <ModalFooter>
             <Button variant='ghost' onClick={onClose}>Cancelar</Button>
-            <Button colorScheme='blue' ml={3}>
+            <Button type='submit' isLoading={creating} colorScheme='blue' ml={3}>
               Salvar
             </Button>
           </ModalFooter>
+            </form>
         </ModalContent>
       </Modal>
     </>
