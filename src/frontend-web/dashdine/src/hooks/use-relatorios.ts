@@ -28,7 +28,7 @@ const useRelatorios: UseRelatorios = () => {
   const getEarns = async ({dataInicial, dataFinal}: GetDTO): Promise<number> => {
     const { data } = await api.get(`/relatorios/pedidos/ganhos?dataInicial=${dataInicial}&dataFinal=${dataFinal}`)
 
-    return data;
+    return data.valorTotalVendas;
   }
 
   return {
