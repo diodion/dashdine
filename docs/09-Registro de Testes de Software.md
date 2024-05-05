@@ -17,6 +17,8 @@
 
 ![image](https://github.com/ICEI-PUC-Minas-PMV-ADS/dashdine/assets/70419372/164b8b2d-fe3f-452d-b272-5e1c0c976788)
 
+|  Tarefa  | Descrição  | Testador|
+| ------------ | ------------ | ------------ |
 |T-004| Permitir que o usuário (Cliente) visualize o historico de pedidos |Cliente visualiza historico de seus pedidos |RF-012|
 
 |T-005| Permitir que o usuário (Cliente) cancele um pedido |Pedido cancelado |RF-011|
