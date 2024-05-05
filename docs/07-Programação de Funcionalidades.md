@@ -96,7 +96,25 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
     "ativo": true
 }
 ```
-
+    /cardapioadm/multi (Post > Adiciona vários itens no cardápio, tratar como Array. Rota acessível para Coordenador, Gerente, Admin, Superuser)
+```json
+[
+    {
+        "nome": "Nome do Item 1",
+        "descricao": "Descrição do Item 1",
+        "valor": 10.99,
+        "ativo": false,
+        "categoria": "6612f609c6b720404cc2b9cb"
+    },
+    {
+        "nome": "Nome do Item 2",
+        "descricao": "Descrição do Item 2",
+        "valor": 15.99,
+        "ativo": true,
+        "categoria": "6612f609c6b720404cc2b9cb"
+    }
+]
+```
     /cardapioadm/ (Get > Visualiza cardápio. Rota acessível para todos os cargos do modulo web)
     /cardapioadm/:id (Patch > id = id do item do cardápio. Atualiza o item do cardápio. Rota acessível para Coordenador, Gerente, Admin, Superuser)
 
@@ -165,38 +183,8 @@ Todos os gets que retornam dados possuem paginação (adicionar ?pag=numero na r
 ````
 
 ### Relatórios
-    /relatorios/pedidos/vendas (Get > Retorna os itens mais pedidos em uma determinada data e hora, assim como da a opção do usuário selecionar o statusConfirmacao desejado. Rota acessível para Coordenador, Gerente, Admin, Superuser)
-```json
-{
-    "dataInicial": "2024-01-01T00:00:00.000Z",
-    "dataFinal": "2024-04-01T23:59:59.999Z",
-    "status": [
-        "Aguardando confirmação",
-        "Confirmado",
-        "Em trânsito",
-        "Liberado",
-        "Entregue",
-        "Cancelado"
-    ] // Pode ser qualquer um desses ou todos
-}
-````
-
-    /relatorios/pedidos/ganhos (Get > Retorna o ganho ou soma total dos pedidos vendidos na data e hora selecionados na requisição, assim como da a opção do usuário selecionar o statusConfirmacao desejado. Rota acessível para Coordenador, Gerente, Admin, Superuser)
-
-```json
-{
-    "dataInicial": "2024-01-01T00:00:00.000Z",
-    "dataFinal": "2024-04-07T23:59:59.999Z",
-    "status": [
-        "Aguardando confirmação",
-        "Confirmado",
-        "Em trânsito",
-        "Liberado",
-        "Entregue",
-        "Cancelado"
-    ] // Pode ser qualquer um desses ou todos
-}
-```
+    /relatorios/pedidos/vendas?dataInicial=AAAA-MM-DD&dataFinal=AAAA-MM-DD  (Get > Retorna os itens mais pedidos em uma determinada data e hora, assim como da a opção do usuário selecionar o statusConfirmacao desejado. Rota acessível para Coordenador, Gerente, Admin, Superuser)
+    /relatorios/pedidos/ganhos?dataInicial=AAAA-MM-DD&dataFinal=AAAA-MM-DD (Get > Retorna o ganho ou soma total dos pedidos vendidos na data e hora selecionados na requisição, assim como da a opção do usuário selecionar o statusConfirmacao desejado. Rota acessível para Coordenador, Gerente, Admin, Superuser)
 
 ## Rotas de cliente
 

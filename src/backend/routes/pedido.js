@@ -96,13 +96,14 @@ router.patch('/enviado/:id',
         LISTACARGO.Coordenador),
     Pedido.informarEmTransito);
 
-router.patch('/conf/:id',
+router.get('/conf/pega',
     verificaCargos(
         LISTACARGO.Admin,
         LISTACARGO.Superuser,
         LISTACARGO.Atendente,
         LISTACARGO.Gerente,
         LISTACARGO.Coordenador),
-    Pedido.confirmarPedido);
+        paginacaoMiddleware(10),
+    Pedido.pegaPedidosConf);
 
 module.exports = router;

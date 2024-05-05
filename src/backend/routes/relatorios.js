@@ -14,7 +14,7 @@ router.route('/pedidos/vendas/')
             LISTACARGO.Gerente,
         ),
         paginacaoMiddleware(10),
-        Pedido.relatorioVendidos);
+        Pedido.relatorioVendidos2);
 
 router.route('/pedidos/ganhos/')
     .get(
@@ -24,6 +24,6 @@ router.route('/pedidos/ganhos/')
             LISTACARGO.Coordenador,
             LISTACARGO.Gerente,
         ),
-    Pedido.relatorioGanhos);
+    Pedido.relatorioGanhos2);
 
 module.exports = router;

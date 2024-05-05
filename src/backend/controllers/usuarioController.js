@@ -106,7 +106,6 @@ const atualizaEndereco = async (req, res) => {
         const enderecoIndex = usuario.endereco.findIndex(endereco => endereco._id.toString() === eid);
         if (enderecoIndex === -1) return res.status(404).json({ mensagem: 'Endereço não encontrado.' });
 
-        // Atualizar o endereço no array
         usuario.endereco[enderecoIndex] = {
             _id: usuario.endereco[enderecoIndex]._id,
             tipo: req.body.tipo,

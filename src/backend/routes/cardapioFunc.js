@@ -48,6 +48,17 @@ router.route('/:id')
             LISTACARGO.Gerente,
             LISTACARGO.Coordenador
         ),
-        cardapioAdm.atualizaCardapio)
+        cardapioAdm.deletaCardapio)
+
+router.route('/multi')
+    .post(
+        verificaCargos(
+            LISTACARGO.Admin,
+            LISTACARGO.Superuser,
+            LISTACARGO.Gerente,
+            LISTACARGO.Coordenador
+        ),
+        cardapioAdm.cadastraCardapioMultiplo)
+
 
 module.exports = router;

@@ -336,6 +336,98 @@ const relatorioVendidos = async (req, res) => {
         res.status(500).json({ message: 'Ocorreu um erro ao processar a solicitação.' });
     }
 };
+const relatorioVendidos2 = async (req, res) => {
+    try {
+        const { dataInicial, dataFinal } = req.query;
+
+        if (!dataInicial || !dataFinal) return res.status(400).json({ message: 'Você não está esquecendo de nada?' });
+
+        const busca = {
+            createdAt: { $gte: new Date(dataInicial), $lte: new Date(dataFinal) }
+        };
+
+        const pedidos = await Pedido.find(busca);
+
+        const vendasPorItem = {};
+        pedidos.forEach(pedido => {
+            pedido.itensPedido.forEach(item => {
+                const { itemId, quantidade } = item;
+                if (vendasPorItem[itemId]) {
+                    vendasPorItem[itemId] += quantidade;
+                } else {
+                    vendasPorItem[itemId] = quantidade;
+                }
+            });
+        });
+
+        // Devido à possibilidade de excluir itens do cardápio, foi necessário
+        // fazer alguns ajustes para evitar erros na busca do itemId.
+        const itensMaisVendidos = await Promise.all(
+            Object.entries(vendasPorItem)
+                .sort((a, b) => b[1] - a[1])
+                .map(async ([itemId, quantidade]) => {
+                    // Verificar se o itemId está presente e é válido
+                    if (!itemId || itemId === 'undefined') return null;
+
+                    try {
+                        const cardapioItem = await Cardapio.findById(itemId);
+                        if (cardapioItem) {
+                            return {
+                                itemId: cardapioItem,
+                                quantidade
+                            };
+                        }
+                        return null;
+                    } catch (error) {
+                        console.error(`Erro ao buscar o item no Cardápio com o ID ${itemId}:`, error);
+                        return null; // Retornar null em caso de erro na busca
+                    }
+                })
+        );
+
+        // Filtrar os itens nulos da lista final para evitar erros
+        const itensValidos = itensMaisVendidos.filter(item => item !== null);
+
+        // Mapear os itens mais vendidos para incluir detalhes do cardápio
+        const itensMaisVendidosDetalhados = await Promise.all(itensValidos.map(async (item) => {
+            try {
+                const cardapioItem = await Cardapio.findById(item.itemId);
+                if (cardapioItem) {
+                    return {
+                        itemId: {
+                            id: cardapioItem.id,
+                            nome: cardapioItem.nome,
+                            descricao: cardapioItem.descricao,
+                            valor: cardapioItem.valor,
+                            ativo: cardapioItem.ativo
+                        },
+                        quantidade: item.quantidade
+                    };
+                }
+                return null;
+            } catch (error) {
+                console.error(`Erro ao buscar o item no Cardápio com o ID ${item.itemId}:`, error);
+                return null;
+            }
+        }));
+
+        // Paginação
+        const { startIndex, endIndex } = req.paginacao;
+        const resultadosPaginados = itensMaisVendidosDetalhados.slice(startIndex, endIndex);
+
+        // Calcular o total de itens vendidos
+        const totalVendido = itensMaisVendidosDetalhados.reduce((total, item) => total + item.quantidade, 0);
+
+        // Verificar se houve vendas
+        if (totalVendido === 0) return res.status(200).json({ message: 'Sem pedidos para o período selecionado' });
+
+        // Retornar os resultados
+        res.status(200).json({ itensMaisVendidos: resultadosPaginados, total: totalVendido });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Ocorreu um erro ao processar a solicitação.' });
+    }
+};
 // Relatório de total ganho durante o período
 const relatorioGanhos = async (req, res) => {
     try {
@@ -365,7 +457,30 @@ const relatorioGanhos = async (req, res) => {
         res.status(500).json({ message: 'Ocorreu um erro ao processar a solicitação.' });
     }
 };
+const relatorioGanhos2 = async (req, res) => {
+    try {   
+        const { dataInicial, dataFinal } = req.query;
 
+        if (!dataInicial || !dataFinal) return res.status(400).json({ message: 'Você não está esquecendo de nada?' });
+
+        let busca = {
+            createdAt: { $gte: new Date(dataInicial), $lte: new Date(dataFinal) }
+        };
+
+        const pedidos = await Pedido.find(busca);
+
+        let valorTotalVendas = 0;
+
+        pedidos.forEach(pedido => {
+            valorTotalVendas += pedido.precoTotal;
+        });
+
+        res.status(200).json({ valorTotalVendas });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Ocorreu um erro ao processar a solicitação.' });
+    }
+};
 // Controller para o proprietário liberar o pedido
 const liberarPedido = async (req, res) => {
     try {
@@ -416,8 +531,54 @@ const confirmarPedido = async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 };
+const pegaPedidosConf = async (req, res) => {
+    try {
+        const pegaPedidos = await Pedido.find({}, "-__v")
+            .populate({
+                path: 'itensPedido.itemId',
+                select: '-createdAt -updatedAt -ativo -__v'
+            })
+            .populate({
+                path: 'usuario',
+                select: '-senha -__v -endereco -telefone -cargos -refreshToken -createdAt -updatedAt'
+            });
+        if (!pegaPedidos || pegaPedidos.length === 0) return res.status(204).json({ 'Mensagem': 'Sem pedidos aguardando confirmação' });
+
+        const pedidosComItens = pegaPedidos.map(pedido => {
+            const pedidoFormatado = pedido.toObject();
+            const detalhesItensUnicos = new Map();
+            pedido.itensPedido.forEach(item => {
+                if (item.itemId) { 
+                    const itemId = item.itemId._id.toString();
+                    if (!detalhesItensUnicos.has(itemId)) {
+                        detalhesItensUnicos.set(itemId, {
+                            itemId: itemId,
+                            quantidade: item.quantidade,
+                            detalhesItem: {
+                                nome: item.itemId.nome,
+                                descricao: item.itemId.descricao,
+                                valor: item.itemId.valor
+                            }
+                        });
+                    }
+                }
+            });
+            pedidoFormatado.itensPedido = [...detalhesItensUnicos.values()];
+            return pedidoFormatado;
+        });
+
+        const { startIndex, endIndex } = req.paginacao;
+        const pedidos = pedidosComItens.slice(startIndex, endIndex);
+
+        return res.status(200).json({ pedidos, Total: pedidosComItens.length });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Erro interno.' });
+    }
+};
 module.exports = {
     pegaUserPedidos,
+    pegaPedidosConf,
     pegaPedido,
     criarPedido,
     attStatusPedido,
@@ -428,5 +589,7 @@ module.exports = {
     confirmarPedido,
     informarEntregue,
     relatorioVendidos,
-    relatorioGanhos
+    relatorioGanhos,
+    relatorioGanhos2,
+    relatorioVendidos2
 }

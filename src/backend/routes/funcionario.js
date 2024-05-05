@@ -13,6 +13,13 @@ router.route('/gerenciar')
             LISTACARGO.Gerente,
         ),
         funcionario.cadastraFunc)
+    .get(
+        verificaCargos(
+            LISTACARGO.Admin,
+            LISTACARGO.Superuser,
+            LISTACARGO.Gerente,
+        ),
+        funcionario.funcBusca)
 
 router.route('/gerenciar/:id')
     .patch(
@@ -50,6 +57,5 @@ router.route('/consulta')
             LISTACARGO.Gerente,
         ),
         paginacaoMiddleware(10),
-        funcionario.funcBusca)
-
+        funcionario.funcBuscaPag)
 module.exports = router;

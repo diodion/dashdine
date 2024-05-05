@@ -3,7 +3,7 @@ const Categoria = require('../models/Categoria');
 
 // Proprietario visualizar todos os itens, ativos ou não
 const verCardapioFunc = async (req, res) => {
-    const cardapio = await Cardapio.find({}, "-createdAt -updatedAt -__v -_id")
+    const cardapio = await Cardapio.find({}, "-createdAt -updatedAt -__v")
     .populate({ 
         path: "categoria", 
         select: "-descricao -createdAt -updatedAt -__v -_id -ativo" 
@@ -45,23 +45,46 @@ const deletaMultiCardapio = async (req, res) => {
     }
 }
 // Cadastra um ou vários itens
-const cadastraCardapio = async (req, res) => {
+const cadastraCardapioMultiplo = async (req, res) => {
     const items = req.body;
-    if (!Array.isArray(items) || items.length === 0) return res.status(400).json({ "Atenção": "Envie algo para cadastrar" });
+    
+    if (!Array.isArray(items)) {
+        return res.status(400).json({ "Atenção": "Envie algo para cadastrar" });
+    }
     
     try {
         const categoriaIds = items.map(item => item.categoria);
         const categoriasExistentes = await Categoria.find({ _id: { $in: categoriaIds } });
         const categoriasIdsExistentes = categoriasExistentes.map(categoria => categoria._id.toString());
 
-        items.forEach(async (item, index) => {
+        for (let index = 0; index < items.length; index++) {
+            const item = items[index];
             if (!item.nome || !item.descricao || !item.valor || !item.categoria || !categoriasIdsExistentes.includes(item.categoria)) {
                 return res.status(400).json({ "Atenção": `Item ${index + 1}: Preencha todos os campos corretamente e forneça uma categoria válida` });
             }
 
             await Cardapio.create(item);
-        });
+        }
         res.status(201).json({ "Sucesso": "Itens cadastrados com sucesso no cardápio" });
+        console.log(items)
+    } catch (err) {
+        res.status(500).json({ "Erro": err.message });
+    }
+}
+const cadastraCardapio = async (req, res) => {
+    const { nome, descricao, valor, categoria, ativo } = req.body;
+    if (!nome || !descricao || !valor) return res.status(400).json({ "Atenção": "Preencha todos os campos" });
+    try {
+        const categoriaExiste = await Categoria.findById(categoria);
+        if (!categoriaExiste) return res.status(404).json({ "Atenção": "Categoria não encontrada" });
+        await Cardapio.create({
+            nome,
+            descricao,
+            valor,
+            categoria,
+            ativo
+        });
+        res.status(201).json({ "Sucesso": `Item ${nome} registrado com sucesso no cardápio` });
     } catch (err) {
         res.status(500).json({ "Erro": err.message });
     }
@@ -84,7 +107,7 @@ const atualizaCardapio = async (req, res) => {
 const verCardapioUser = async (req, res) => {
     const cardapioCliente = await Cardapio.find(
         { ativo: true }, 
-        "-createdAt -updatedAt -__v -_id"
+        "-createdAt -updatedAt -__v"
     ).populate({ 
         path: "categoria", 
         select: "-descricao -createdAt -updatedAt -__v -_id -ativo" 
@@ -99,5 +122,6 @@ module.exports = {
     cadastraCardapio,
     deletaCardapio,
     atualizaCardapio,
-    deletaMultiCardapio
+    deletaMultiCardapio,
+    cadastraCardapioMultiplo
  }
