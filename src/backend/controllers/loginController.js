@@ -22,8 +22,7 @@ const userLogin = async (req, res) => {
             {
                 "Info": {
                     "entrada": achaUsuario.entrada,
-                    "cargos": cargos,
-                    // "id": id
+                    "cargos": cargos
                 }
             },
             process.env.ACCESS_TOKEN_SECRET,
@@ -68,8 +67,12 @@ const funcLogin = async (req, res) => {
             {
                 "Info": {
                     "entrada": achaFuncionario.entrada,
+<<<<<<< HEAD
                     "cargos": cargos,
                     // "id": id
+=======
+                    "cargos": cargos
+>>>>>>> 8b6c5b28832c2553be5be57df274bb5ee3a7851e
                 }
             },
             process.env.ACCESS_TOKEN_SECRET,

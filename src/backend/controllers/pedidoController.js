@@ -45,9 +45,32 @@ const pegaUserPedidos = async (req, res) => {
     }
 }
 // Pega pedidos com status em confirmação
-const pegaPedidosConf = async (req, res) => {
+const pegaPedido = async (req, res) => {
     try {
-        const pegaPedidos = await Pedido.find({ statusConfirmacao: "Aguardando confirmação" }, "-__v")
+        const statusMap = {
+            'confirmacao': 'Aguardando confirmação',
+            'emtransito': 'Em trânsito',
+            'confirmado': 'Confirmado',
+            'entregue': 'Entregue',
+            'cancelado': 'Cancelado',
+            'liberado': 'Liberado'
+        };
+
+        let filtroStatus = {};
+
+        if (req.query.status) {
+            const statusParam = req.query.status.toLowerCase(); 
+            console.log("Status Param:", statusParam);
+            const statusArray = statusParam.split('%').map(s => s.trim()); 
+            console.log("Status Array:", statusArray);
+        
+            const statusReal = statusArray.map(s => statusMap[s]);
+            console.log("Status Real:", statusReal);
+        
+            filtroStatus = { statusConfirmacao: { $in: statusReal } };
+        }
+
+        const pegaPedidos = await Pedido.find(filtroStatus, "-__v")
             .populate({
                 path: 'itensPedido.itemId',
                 select: '-createdAt -updatedAt -ativo -__v'
@@ -56,7 +79,6 @@ const pegaPedidosConf = async (req, res) => {
                 path: 'usuario',
                 select: '-senha -__v -endereco -telefone -cargos -refreshToken -createdAt -updatedAt'
             });
-        if (!pegaPedidos || pegaPedidos.length === 0) return res.status(204).json({ 'Mensagem': 'Sem pedidos aguardando confirmação' });
 
         // Mapeia os pedidos para incluir detalhes únicos dos itens de pedido
         const pedidosComItens = pegaPedidos.map(pedido => {
@@ -87,8 +109,7 @@ const pegaPedidosConf = async (req, res) => {
 
         return res.status(200).json({ pedidos, Total: pedidosComItens.length });
     } catch (err) {
-        console.error(err);
-        return res.status(500).json({ message: 'Erro interno.' });
+        res.status(500).json({ success: false, message: 'Erro interno.', error: error.message });
     }
 }
 // Criar Pedido
@@ -117,7 +138,7 @@ const criarPedido = async (req, res) => {
 
         res.status(201).json({ success: true, data: pedido, codigo: pedido.codigo })
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({ success: false, message: 'Erro interno.', error: error.message });
     }
 };
 // Processar pagamento
@@ -144,23 +165,48 @@ const pagarPedido = async (req, res) => {
             res.status(400).json({ success: false, message: resultadoPagamento.message });
         }
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({ success: false, message: 'Erro interno.', error: error.message });
     }
 };
 // Controller para o proprietário confirmar o pedido
-const confirmarPedido = async (req, res) => {
+const attStatusPedido = async (req, res) => {
     try {
-        const id = req.params.id;
-        const pedido = await Pedido.findById(id);
+        let atualizacoes = req.body;
+        if (!Array.isArray(atualizacoes)) atualizacoes = [atualizacoes];
 
-        if (!pedido) return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
+        const statusPermitidos = ["Aguardando confirmação", "Confirmado", "Em trânsito", "Liberado", "Entregue", "Cancelado"];
 
-        pedido.statusConfirmacao = 'Confirmado';
-        await pedido.save();
+        const pedidos = [];
 
-        res.status(201).json({ success: true, message: 'Pedido confirmado com sucesso', data: pedido });
+        for (const atualizacao of atualizacoes) {
+            const id = atualizacao._id;
+            const novoStatus = atualizacao.statusConfirmacao;
+
+            if (!id || !novoStatus) {
+                pedidos.push({ success: false, error: 'Id ou Status em falta...' });
+                continue;
+            }
+
+            if (!statusPermitidos.includes(novoStatus)) {
+                pedidos.push({ success: false, error: 'Status inválido.' });
+                continue;
+            }
+
+            const resultado = await Pedido.updateOne({ _id: id }, { statusConfirmacao: novoStatus });
+            
+            pedidos.push({
+                success: resultado.nModified !== 0,
+                message: resultado.nModified !== 0 ? `Pedido atualizado com ${novoStatus}.` : undefined,
+                error: resultado.nModified === 0 ? `Pedido com ID ${id} não encontrado ou não atualizado` : undefined,
+                id: resultado.nModified !== 0 ? id : undefined
+            });
+            
+            
+        }
+
+        res.status(201).json({ pedidos });
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({ success: false, message: 'Erro interno.', error: error.message });
     }
 };
 // Controller para o proprietário cancelar o pedido
@@ -178,40 +224,6 @@ const cancelarPedido = async (req, res) => {
         await pedido.save();
 
         res.status(201).json({ success: true, message: 'Pedido cancelado com sucesso', data: pedido });
-    } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
-    }
-};
-// Controller para o proprietário liberar o pedido
-const liberarPedido = async (req, res) => {
-    try {
-        const id = req.params.id;
-
-        const pedido = await Pedido.findById(id);
-
-        if (!pedido) return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
-
-        pedido.statusConfirmacao = 'Liberado';
-        await pedido.save();
-
-        res.status(201).json({ success: true, message: 'Pedido liberado com sucesso', data: pedido });
-    } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
-    }
-};
-// Controller para o proprietário informar que o pedido está em trânsito
-const informarEmTransito = async (req, res) => {
-    try {
-        const id = req.params.id;
-
-        const pedido = await Pedido.findById(id);
-
-        if (!pedido) return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
-
-        pedido.statusConfirmacao = 'Em transito';
-        await pedido.save();
-
-        res.status(201).json({ success: true, message: 'Pedido informado como em trânsito com sucesso', data: pedido });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
@@ -354,15 +366,66 @@ const relatorioGanhos = async (req, res) => {
     }
 };
 
+// Controller para o proprietário liberar o pedido
+const liberarPedido = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const pedido = await Pedido.findById(id);
+
+        if (!pedido) return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
+
+        pedido.statusConfirmacao = 'Liberado';
+        await pedido.save();
+
+        res.status(201).json({ success: true, message: 'Pedido liberado com sucesso', data: pedido });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
+// Controller para o proprietário informar que o pedido está em trânsito
+const informarEmTransito = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const pedido = await Pedido.findById(id);
+
+        if (!pedido) return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
+
+        pedido.statusConfirmacao = 'Em trânsito';
+        await pedido.save();
+
+        res.status(201).json({ success: true, message: 'Pedido informado como em trânsito com sucesso', data: pedido });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
+// Controller para o proprietário informar que o pedido está confirmado
+const confirmarPedido = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const pedido = await Pedido.findById(id);
+
+        if (!pedido) return res.status(404).json({ success: false, error: 'Pedido não encontrado' });
+
+        pedido.statusConfirmacao = 'Confirmado';
+        await pedido.save();
+
+        res.status(201).json({ success: true, message: 'Pedido confirmado com sucesso', data: pedido });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
 module.exports = {
     pegaUserPedidos,
-    pegaPedidosConf,
+    pegaPedido,
     criarPedido,
-    pagarPedido,
-    confirmarPedido,
-    cancelarPedido,
-    liberarPedido,
+    attStatusPedido,
     informarEmTransito,
+    liberarPedido,
+    pagarPedido,
+    cancelarPedido,
+    confirmarPedido,
     informarEntregue,
     relatorioVendidos,
     relatorioGanhos

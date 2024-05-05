@@ -83,5 +83,17 @@ const deletaFunc = async (req, res) => {
         res.status(500).json({ "Erro": err.message });
     }
 }
+// Pega funcionário
+const funcBusca = async (req, res) => {
+    try {
+        const pegaFuncionarios = await Funcionario.find({}, "-senha -__v -refreshToken -_id");
+        if (!pegaFuncionarios) return res.status(204).json({ "Mensagem": "Sem funcionários cadastrados" });
+        const { startIndex, endIndex } = req.paginacao;
+        const funcionarios = pegaFuncionarios.slice(startIndex, endIndex);
+        return res.status(200).json({ funcionarios, Total: pegaFuncionarios.length });
+    } catch (err) {
+        res.status(500).json({ "Erro": err.message });
+    }
+}
 
-module.exports = { cadastraFunc, attFuncGerente, attFuncAtd, deletaFunc };
+module.exports = { cadastraFunc, attFuncGerente, attFuncAtd, deletaFunc, funcBusca };
