@@ -5,40 +5,48 @@ import React, { FormEvent, useState } from 'react';
 interface Props {
   isOpen: boolean,
   onClose: () => void,
-  title: string
+  title: string,
+  categoria?: Categoria
 }
 
 const CategoriaModal: React.FC<Props> = function ({
   title,
   isOpen,
   onClose,
+  categoria
 }) {
 
-  const { create } = useCategorias();
+  const { create, edit } = useCategorias();
   const fields = [
     {
       name: 'nome',
-      defaultValue: ''
+      defaultValue: categoria?.nome || ''
     },
     {
       name: 'descricao',
-      defaultValue: ''
+      defaultValue: categoria?.descricao || ''
     },
   ]
 
   const [creating, setCreating] = useState(false);
 
-  const handleAddProduct = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleAdd = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const nome = form.get('nome')?.toString();
     const descricao = form.get('descricao')?.toString();
+    const ativo = !!form.get('ativo')?.toString();
 
     if(!(nome && descricao)) return;
 
     setCreating(true);
-    await create({nome, descricao});
+    if(categoria){
+      await edit({id: categoria._id, nome, descricao, ativo});
+    } else {
+      await create({nome, descricao, ativo});
+    }
     setCreating(false);
+    onClose();
 
   }
 
@@ -49,7 +57,7 @@ const CategoriaModal: React.FC<Props> = function ({
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
-            <form>
+            <form onSubmit={handleAdd}>
           <ModalBody>
               <Stack gap='24px'>
                 {
@@ -64,7 +72,7 @@ const CategoriaModal: React.FC<Props> = function ({
                 }
 
                 <FormControl>
-                  <Checkbox name='ativo'>
+                  <Checkbox name='ativo' defaultChecked={categoria?.ativo}>
                     Ativo
                   </Checkbox>
                 </FormControl>

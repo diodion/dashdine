@@ -9,13 +9,12 @@ interface EditDTO {
   id: string,
   nome: string,
   descricao: string,
-  categoria: string,
-  valor: string,
   ativo: boolean
 }
 interface CreateDTO {
   nome: string,
   descricao: string,
+  ativo: boolean
 }
 interface UseCategoriasReturn {
   categorias: Categoria[] | undefined
@@ -43,7 +42,7 @@ const useCategorias: UseCategorias = () => {
   );
 
   const edit= useCallback(
-    async ({ id, ...body }: EditDTO) => api.patch(`/categoria/${id}`, { body }).then((res) => res.data),
+    async ({ id, ...body }: EditDTO) => api.patch(`/categoria/${id}`, body).then((res) => res.data),
     [api],
   );
 

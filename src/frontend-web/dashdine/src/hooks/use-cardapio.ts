@@ -49,7 +49,7 @@ const useCardapio: UseCardapio = () => {
     [api],
   );
   const editProduct = useCallback(
-    async ({ id, ...body }: EditProductDTO) => api.patch(`/cardapioadm/${id}`, { body }).then((res) => res.data),
+    async ({ id, ...body }: EditProductDTO) => api.patch(`/cardapioadm/${id}`, body).then((res) => res.data),
     [api],
   );
 

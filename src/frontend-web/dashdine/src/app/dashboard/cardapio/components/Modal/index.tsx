@@ -44,9 +44,10 @@ const ProdutoModal: React.FC<Props> = function ({
   const handleAddProduct = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
+    console.log(form.entries());
     const nome = form.get('nome')?.toString();
     const descricao = form.get('descricao')?.toString();
-    const categoria = form.get('categoria')?.toString();
+    const categoria = form.get('categoria');
     const valor = form.get('valor')?.toString();
     const ativo = !!form.get('ativo')?.toString();
 
@@ -78,7 +79,8 @@ const ProdutoModal: React.FC<Props> = function ({
                       </FormLabel>
                       {
                         field.options ?
-                          <Select>
+                          <Select name={field.name}>
+                          <option>Selecione</option>
                             {
                               field.options.map(option => <option key={option} value={option}>{option}</option>)
                             }
