@@ -12,7 +12,6 @@ const verifyJWT = (req, res, next) => {
             if (err) return res.sendStatus(403); //invalid token
             req.entrada = decoded.Info.entrada;
             req.cargos = decoded.Info.cargos;
-            req.idUser = decoded.Info.id;
             next();
         }
     );

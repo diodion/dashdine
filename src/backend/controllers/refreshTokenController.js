@@ -21,7 +21,6 @@ const userRefresht = async (req, res) => {
             const accessToken = jwt.sign(
                 {
                     "Info": {
-                        "id": id,
                         "entrada": decoded.entrada,
                         "cargos": cargos
                     }
@@ -53,7 +52,6 @@ const funcRefresht = async (req, res) => {
             const accessToken = jwt.sign(
                 {
                     "Info": {
-                        "id": id,
                         "entrada": decoded.entrada,
                         "cargos": cargos
                     }

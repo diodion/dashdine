@@ -3,6 +3,7 @@ const router = express.Router();
 const funcionario = require('../controllers/funcionarioController');
 const LISTACARGO = require('../config/cargosList');
 const verificaCargos = require('../middleware/verificaCargo');
+const paginacaoMiddleware = require('../middleware/paginacao');
 
 router.route('/gerenciar')
     .post(
@@ -12,7 +13,7 @@ router.route('/gerenciar')
             LISTACARGO.Gerente,
         ),
         funcionario.cadastraFunc)
-        
+
 router.route('/gerenciar/:id')
     .patch(
         verificaCargos(
@@ -40,5 +41,15 @@ router.route('/attdados/:id')
             LISTACARGO.Coordenador
         ),
         funcionario.attFuncAtd)
+
+router.route('/consulta')
+    .get(
+        verificaCargos(
+            LISTACARGO.Admin,
+            LISTACARGO.Superuser,
+            LISTACARGO.Gerente,
+        ),
+        paginacaoMiddleware(10),
+        funcionario.funcBusca)
 
 module.exports = router;

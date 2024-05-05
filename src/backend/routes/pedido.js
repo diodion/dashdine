@@ -6,12 +6,12 @@ const LISTACARGO = require('../config/cargosList');
 const verificaCargos = require('../middleware/verificaCargo');
 
 router.post('/',
-        verificaCargos(
-            LISTACARGO.Cliente
-        ), 
-        Pedido.criarPedido);
+    verificaCargos(
+        LISTACARGO.Cliente
+    ),
+    Pedido.criarPedido);
 
-router.route('/conf/pega/')
+router.route('/consulta')
     .get(
         verificaCargos(
             LISTACARGO.Admin,
@@ -21,7 +21,18 @@ router.route('/conf/pega/')
             LISTACARGO.Coordenador
         ),
         paginacaoMiddleware(10),
-        Pedido.pegaPedidosConf)
+        Pedido.pegaPedido)
+
+router.route('/status')
+    .patch(
+        verificaCargos(
+            LISTACARGO.Admin,
+            LISTACARGO.Superuser,
+            LISTACARGO.Atendente,
+            LISTACARGO.Gerente,
+            LISTACARGO.Coordenador
+        ),
+        Pedido.attStatusPedido)
 
 router.route('/pega/:id')
     .get(
@@ -36,16 +47,7 @@ router.route('/paga/:id')
         verificaCargos(
             LISTACARGO.Cliente
         ),
-    Pedido.pagarPedido);
-
-router.patch('/conf/:id',
-    verificaCargos(
-        LISTACARGO.Admin,
-        LISTACARGO.Superuser,
-        LISTACARGO.Atendente,
-        LISTACARGO.Gerente,
-        LISTACARGO.Coordenador),
-    Pedido.confirmarPedido);
+        Pedido.pagarPedido);
 
 router.patch('/cancel/:id',
     verificaCargos(
@@ -56,6 +58,25 @@ router.patch('/cancel/:id',
         LISTACARGO.Gerente,
         LISTACARGO.Coordenador),
     Pedido.cancelarPedido);
+
+router.patch('/entregue/:id',
+    verificaCargos(
+        LISTACARGO.Cliente,
+        LISTACARGO.Admin,
+        LISTACARGO.Superuser,
+        LISTACARGO.Atendente,
+        LISTACARGO.Gerente,
+        LISTACARGO.Coordenador),
+    Pedido.informarEntregue);
+
+router.patch('/conf/:id',
+    verificaCargos(
+        LISTACARGO.Admin,
+        LISTACARGO.Superuser,
+        LISTACARGO.Atendente,
+        LISTACARGO.Gerente,
+        LISTACARGO.Coordenador),
+    Pedido.confirmarPedido);
 
 router.patch('/liberar/:id',
     verificaCargos(
@@ -75,13 +96,13 @@ router.patch('/enviado/:id',
         LISTACARGO.Coordenador),
     Pedido.informarEmTransito);
 
-router.patch('/entregue/:id',
+router.patch('/conf/:id',
     verificaCargos(
         LISTACARGO.Admin,
         LISTACARGO.Superuser,
         LISTACARGO.Atendente,
         LISTACARGO.Gerente,
         LISTACARGO.Coordenador),
-    Pedido.informarEntregue);
+    Pedido.confirmarPedido);
 
 module.exports = router;

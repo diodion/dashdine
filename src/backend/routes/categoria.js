@@ -22,15 +22,7 @@ router.route('/')
             LISTACARGO.Coordenador
         ),
         Categoria.verCategoria)
-    .delete(
-        verificaCargos(
-            LISTACARGO.Admin,
-            LISTACARGO.Superuser,
-            LISTACARGO.Atendente,
-            LISTACARGO.Gerente,
-            LISTACARGO.Coordenador
-        ),
-        Categoria.deletaCategoria)
+
 
 router.route('/:id')
     .patch(
@@ -41,5 +33,14 @@ router.route('/:id')
             LISTACARGO.Coordenador
         ),
         Categoria.atualizaCategoria)
+    .delete(
+        verificaCargos(
+            LISTACARGO.Admin,
+            LISTACARGO.Superuser,
+            LISTACARGO.Atendente,
+            LISTACARGO.Gerente,
+            LISTACARGO.Coordenador
+        ),
+        Categoria.deletaCategoria)
 
 module.exports = router;
