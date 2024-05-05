@@ -19,6 +19,13 @@ const Categorias: React.FC = function () {
     setRemoving(undefined);
   }
 
+  const [editingCategory, setEditingCategory] = useState<Categoria>();
+  const handleEdit = (category: Categoria): void => {
+    onOpen();
+    setEditingCategory(category);
+  }
+
+
   return (
     <>
       <Card>
@@ -41,7 +48,7 @@ const Categorias: React.FC = function () {
                   <Td>
                     <HStack justifyContent={'flex-end'}>
                       <Button colorScheme='red' isLoading={removing === c._id} onClick={() => handleRemove(c._id)}>Deletar</Button>
-                      <Button colorScheme='blue' onClick={onOpen}>Editar</Button>
+                      <Button colorScheme='blue' onClick={() => handleEdit(c)}>Editar</Button>
                     </HStack>
                   </Td>
                 </Tr>
@@ -51,7 +58,7 @@ const Categorias: React.FC = function () {
         </Table>
       </Card>
 
-      <CategoriaModal title='Editar categoria' isOpen={isOpen} onClose={onClose} />
+      <CategoriaModal title='Editar categoria' isOpen={isOpen} onClose={onClose} categoria={editingCategory} />
       <CategoriaModal title='Cadastrar categoria' isOpen={addIsOpen} onClose={addOnClose} />
     </>
   )

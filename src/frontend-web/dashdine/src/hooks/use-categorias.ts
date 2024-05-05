@@ -2,21 +2,25 @@ import { UseMutateFunction, useMutation, useQuery, useQueryClient } from "@tanst
 import useApi from "./use-api";
 import { useCallback } from "react";
 
-interface RemoveProductDTO {
+interface RemoveDTO {
   id: string
 }
-interface EditProductDTO {
+interface EditDTO {
   id: string,
   nome: string,
   descricao: string,
-  categoria: string,
-  valor: string,
+  ativo: boolean
+}
+interface CreateDTO {
+  nome: string,
+  descricao: string,
   ativo: boolean
 }
 interface UseCategoriasReturn {
   categorias: Categoria[] | undefined
-  edit: UseMutateFunction<any, Error, EditProductDTO, unknown>
-  remove: UseMutateFunction<any, Error, RemoveProductDTO, unknown>
+  edit: UseMutateFunction<any, Error, EditDTO, unknown>
+  remove: UseMutateFunction<any, Error, RemoveDTO, unknown>
+  create: UseMutateFunction<any, Error, CreateDTO, unknown>
 }
 
 interface UseCategorias {
@@ -32,13 +36,18 @@ const useCategorias: UseCategorias = () => {
     [api],
   );
 
-  const removeProduct = useCallback(
-    async ({ id }: RemoveProductDTO) => api.delete(`/categoria/${id}`).then((res) => res.data),
+  const remove = useCallback(
+    async ({ id }: RemoveDTO) => api.delete(`/categoria/${id}`).then((res) => res.data),
     [api],
   );
 
-  const editProduct = useCallback(
-    async ({ id, ...body }: EditProductDTO) => api.patch(`/categoria/${id}`, { body }).then((res) => res.data),
+  const edit= useCallback(
+    async ({ id, ...body }: EditDTO) => api.patch(`/categoria/${id}`, body).then((res) => res.data),
+    [api],
+  );
+
+  const create = useCallback(
+    async (params: CreateDTO) => api.post(`/categoria`, params).then((res) => res.data),
     [api],
   );
 
@@ -48,18 +57,23 @@ const useCategorias: UseCategorias = () => {
   });
 
   const editMutation = useMutation({
-    mutationFn: editProduct,
+    mutationFn: edit,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['categorias'] }),
+  });
+  const createMutation = useMutation({
+    mutationFn: create,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['categorias'] }),
   });
   const removeMutation = useMutation({
-    mutationFn: removeProduct,
+    mutationFn: remove,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['categorias'] }),
   });
 
   return {
     categorias: query.data,
     edit: editMutation.mutateAsync,
-    remove: removeMutation.mutateAsync
+    remove: removeMutation.mutateAsync,
+    create: createMutation.mutateAsync
   }
 }
 
