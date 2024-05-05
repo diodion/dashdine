@@ -13,54 +13,54 @@ interface EditProductDTO {
   valor: string,
   ativo: boolean
 }
-interface UseCardapioReturn {
-  produtos: Produto[] | undefined
+interface UseCategoriasReturn {
+  categorias: Categoria[] | undefined
   edit: UseMutateFunction<any, Error, EditProductDTO, unknown>
   remove: UseMutateFunction<any, Error, RemoveProductDTO, unknown>
 }
 
-interface UseCardapio {
-  (): UseCardapioReturn
+interface UseCategorias {
+  (): UseCategoriasReturn
 }
 
-const useCardapio: UseCardapio = () => {
+const useCategorias: UseCategorias = () => {
   const { api } = useApi();
   const queryClient = useQueryClient();
 
-  const getCardapio = useCallback(
-    () => async () => api.get('/cardapioadm').then((res) => res.data),
+  const getCategorias = useCallback(
+    () => async () => api.get('/categoria').then((res) => res.data),
     [api],
   );
 
   const removeProduct = useCallback(
-    async ({ id }: RemoveProductDTO) => api.delete(`/cardapioadm/${id}`).then((res) => res.data),
+    async ({ id }: RemoveProductDTO) => api.delete(`/categoria/${id}`).then((res) => res.data),
     [api],
   );
 
   const editProduct = useCallback(
-    async ({ id, ...body }: EditProductDTO) => api.patch(`/cardapioadm/${id}`, { body }).then((res) => res.data),
+    async ({ id, ...body }: EditProductDTO) => api.patch(`/categoria/${id}`, { body }).then((res) => res.data),
     [api],
   );
 
   const query = useQuery({
-    queryKey: ['produtos'],
-    queryFn: getCardapio(),
+    queryKey: ['categorias'],
+    queryFn: getCategorias(),
   });
 
   const editMutation = useMutation({
     mutationFn: editProduct,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['produtos'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['categorias'] }),
   });
   const removeMutation = useMutation({
     mutationFn: removeProduct,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['produtos'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['categorias'] }),
   });
 
   return {
-    produtos: query.data,
+    categorias: query.data,
     edit: editMutation.mutateAsync,
     remove: removeMutation.mutateAsync
   }
 }
 
-export default useCardapio;
+export default useCategorias;

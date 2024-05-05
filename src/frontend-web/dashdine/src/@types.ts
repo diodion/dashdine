@@ -8,7 +8,6 @@ interface User {
   cpf: string,
   email: string,
   telefone: string,
-  senha: string,
 }
 
 interface Funcionario extends User {
@@ -20,14 +19,16 @@ interface Funcionario extends User {
 }
 
 interface Produto {
+  _id: string,
   nome: string,
   descricao: string,
-  categoria: string,
+  categoria: { nome: string },
   valor: string,
   ativo: boolean
 }
 
 interface Categoria {
+  _id: string,
   nome: string,
   descricao: string,
   ativo: boolean
@@ -57,6 +58,30 @@ interface PedidoImpl {
 }
 
 interface Pedido {
-  id: string | number,
-  status: string
+  codigo: string,
+  createdAt: string,
+  endereco: {
+    bairro: string,
+    cep: string,
+    cidade: string,
+    logradouro: string,
+    numero: string,
+    referencia: string,
+    uf: string,
+  },
+  itensPedido: {
+    itemId: string,
+    quantidade: number,
+    detalhesItem: {
+      nome: string,
+      descricao: string,
+      valor: string
+    }
+  }[]
+  precoTotal: number,
+  statusConfirmacao: string,
+  statusPagamento: string,
+  telefone: string,
+  updatedAt: string,
+  _id: string
 }

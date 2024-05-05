@@ -2,10 +2,12 @@
 
 import Card from '@/components/Card';
 import { Badge, Button, Grid, Heading, HStack, Stack, Table, Tbody, Td, Th, Thead, Tr, useDisclosure } from '@chakra-ui/react';
-import React from 'react';
+import React, { useMemo } from 'react';
 import Pedido from './components/Pedido';
+import usePedidos from '@/hooks/use-pedidos';
 
 const PedidosPage: React.FC = function () {
+  const { pedidos } = usePedidos();
 
   const pedidosMock = [
     {
@@ -38,6 +40,8 @@ const PedidosPage: React.FC = function () {
     }
   ]
 
+  const getPedidos = (status: string): Pedido[] => pedidos?.filter(p => p.statusConfirmacao === status) || []
+
   const statuses = ["Aguardando confirmação", "Confirmado", "Em transito", "Liberado", "Entregue", "Cancelado"]
   const colors = ['yellow', 'orange', 'blue', 'blue', 'green', 'red']
 
@@ -53,8 +57,8 @@ const PedidosPage: React.FC = function () {
 
               <Stack mt='24px'>
                 {
-                  pedidosMock.filter(pedido => pedido.status === status).map(pedido => (
-                    <Pedido key={pedido.id} pedido={pedido} />
+                  getPedidos(status).map(pedido => (
+                    <Pedido key={pedido.codigo} pedido={pedido} />
                   ))
                 }
               </Stack>

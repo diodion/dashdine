@@ -1,35 +1,39 @@
+import useCategorias from '@/hooks/use-categorias';
 import { Button, Checkbox, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Stack, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 
 interface Props {
   isOpen: boolean,
   onClose: () => void,
-  title: string
+  title: string,
+  product?: Produto
 }
 
 const ProdutoModal: React.FC<Props> = function ({
   title,
   isOpen,
   onClose,
+  product
 }) {
 
+  const { categorias } = useCategorias();
   const fields = [
     {
       name: 'nome',
-      defaultValue: ''
+      defaultValue: product?.nome || ''
     },
     {
       name: 'descricao',
-      defaultValue: ''
+      defaultValue: product?.descricao || ''
     },
     {
       name: 'categoria',
       defaultValue: '',
-      options: []
+      options: categorias?.map(c => c.nome)
     },
     {
       name: 'valor',
-      defaultValue: ''
+      defaultValue: product?.valor || ''
     }
   ]
 
@@ -63,7 +67,7 @@ const ProdutoModal: React.FC<Props> = function ({
                   ))
                 }
                 <FormControl>
-                  <Checkbox name='ativo'>
+                  <Checkbox name='ativo' defaultChecked={product?.ativo}>
                     Ativo
                   </Checkbox>
                 </FormControl>

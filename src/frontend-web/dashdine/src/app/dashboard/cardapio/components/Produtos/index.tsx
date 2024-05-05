@@ -2,12 +2,28 @@
 
 import Card from '@/components/Card';
 import { Button, Heading, HStack, Table, Tbody, Td, Th, Thead, Tr, useDisclosure } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import ProdutoModal from '../Modal';
+import useCardapio from '@/hooks/use-cardapio';
 
 const Produtos: React.FC = function () {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: addIsOpen, onOpen: addOnOpen, onClose: addOnClose } = useDisclosure();
+
+  const { produtos, remove } = useCardapio();
+
+  const [removing, setRemoving] = useState<string>()
+  const handleRemove = async (id: string): Promise<void> => {
+    setRemoving(id);
+    await remove({ id });
+    setRemoving(undefined);
+  }
+
+  const [editingProduct, setEditingProduct] = useState<Produto>();
+  const handleEdit = (product: Produto): void => {
+    onOpen();
+    setEditingProduct(product);
+  }
 
   return (
     <>
@@ -25,23 +41,27 @@ const Produtos: React.FC = function () {
             <Th textAlign={'right'}>Ações</Th>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>Leite</Td>
-              <Td>Desnatado</Td>
-              <Td>Frios</Td>
-              <Td>4,40</Td>
-              <Td>
-                <HStack justifyContent={'flex-end'}>
-                  <Button colorScheme='red'>Deletar</Button>
-                  <Button colorScheme='blue' onClick={onOpen}>Editar</Button>
-                </HStack>
-              </Td>
-            </Tr>
+            {
+              produtos?.map(p => (
+                <Tr key={p.nome}>
+                  <Td>{p.nome}</Td>
+                  <Td>{p.descricao}</Td>
+                  <Td>{p.categoria?.nome}</Td>
+                  <Td>{p.valor}</Td>
+                  <Td>
+                    <HStack justifyContent={'flex-end'}>
+                      <Button colorScheme='red' isLoading={removing === p._id} onClick={() => handleRemove(p._id)}>Deletar</Button>
+                      <Button colorScheme='blue' onClick={() => handleEdit(p)}>Editar</Button>
+                    </HStack>
+                  </Td>
+                </Tr>
+              ))
+            }
           </Tbody>
         </Table>
       </Card>
 
-      <ProdutoModal title='Editar produto' isOpen={isOpen} onClose={onClose} />
+      <ProdutoModal title='Editar produto' isOpen={isOpen} onClose={onClose} product={editingProduct} />
       <ProdutoModal title='Cadastrar produto' isOpen={addIsOpen} onClose={addOnClose} />
     </>
   )

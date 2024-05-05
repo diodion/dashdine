@@ -15,8 +15,7 @@ const useAuth: UseAuth = () => {
 
   const login: UseAuthReturn['login'] = async (email, senha) => {
     try {
-      const { data } = await api.post('/login/web', { email, senha });
-
+      const { data } = await api.post('/login/web', { entrada: email, senha });
 
       localStorage.setItem('token', data.accessToken)
       return true;

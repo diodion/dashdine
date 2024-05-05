@@ -2,7 +2,7 @@
 
 import useLogin from '@/hooks/use-login';
 import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Stack } from '@chakra-ui/react';
-import Router from 'next/router';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const Login: React.FC = function () {
@@ -12,12 +12,14 @@ const Login: React.FC = function () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const router = useRouter();
+
   const handleLogin = async (): Promise<void> => {
     setLoging(true);
     const succeed = await login(email, password);
 
     if (succeed) {
-      Router.push('/dashboard/pedidos');
+      router.push('/dashboard/pedidos');
       return;
     }
 

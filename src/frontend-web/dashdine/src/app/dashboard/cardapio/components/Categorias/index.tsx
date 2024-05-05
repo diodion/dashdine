@@ -2,12 +2,22 @@
 
 import Card from '@/components/Card';
 import { Button, Heading, HStack, Table, Tbody, Td, Th, Thead, Tr, useDisclosure } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import CategoriaModal from '../CategoriaModal';
+import useCategorias from '@/hooks/use-categorias';
 
 const Categorias: React.FC = function () {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: addIsOpen, onOpen: addOnOpen, onClose: addOnClose } = useDisclosure();
+
+  const { categorias, remove } = useCategorias();
+
+  const [removing, setRemoving] = useState<string>()
+  const handleRemove = async (id: string): Promise<void> => {
+    setRemoving(id);
+    await remove({ id });
+    setRemoving(undefined);
+  }
 
   return (
     <>
@@ -23,16 +33,20 @@ const Categorias: React.FC = function () {
             <Th textAlign={'right'}>Ações</Th>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>Doces</Td>
-              <Td>Bom</Td>
-              <Td>
-                <HStack justifyContent={'flex-end'}>
-                  <Button colorScheme='red'>Deletar</Button>
-                  <Button colorScheme='blue' onClick={onOpen}>Editar</Button>
-                </HStack>
-              </Td>
-            </Tr>
+            {
+              categorias?.map(c => (
+                <Tr key={c.nome}>
+                  <Td>{c.nome}</Td>
+                  <Td>{c.descricao}</Td>
+                  <Td>
+                    <HStack justifyContent={'flex-end'}>
+                      <Button colorScheme='red' isLoading={removing === c._id} onClick={() => handleRemove(c._id)}>Deletar</Button>
+                      <Button colorScheme='blue' onClick={onOpen}>Editar</Button>
+                    </HStack>
+                  </Td>
+                </Tr>
+              ))
+            }
           </Tbody>
         </Table>
       </Card>

@@ -4,10 +4,13 @@ import Card from '@/components/Card';
 import { Button, Heading, HStack, Table, Tbody, Td, Th, Thead, Tr, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import FuncionarioModal from './components/Modal';
+import useFuncionarios from '@/hooks/use-funcionarios';
 
 const FuncionariosPage: React.FC = function () {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: addIsOpen, onOpen: addOnOpen, onClose: addOnClose } = useDisclosure();
+
+  const { funcionarios } = useFuncionarios();
 
   return (
     <>
@@ -25,18 +28,22 @@ const FuncionariosPage: React.FC = function () {
             <Th textAlign={'right'}>Ações</Th>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>Antony</Td>
-              <Td>mail@mail.com</Td>
-              <Td>483578943</Td>
-              <Td>Cargo</Td>
-              <Td>
-                <HStack justifyContent={'flex-end'}>
-                  <Button colorScheme='red'>Deletar</Button>
-                  <Button colorScheme='blue' onClick={onOpen}>Editar</Button>
-                </HStack>
-              </Td>
-            </Tr>
+            {
+              funcionarios?.map(f => (
+                <Tr>
+                  <Td>Antony</Td>
+                  <Td>mail@mail.com</Td>
+                  <Td>483578943</Td>
+                  <Td>Cargo</Td>
+                  <Td>
+                    <HStack justifyContent={'flex-end'}>
+                      <Button colorScheme='red'>Deletar</Button>
+                      <Button colorScheme='blue' onClick={onOpen}>Editar</Button>
+                    </HStack>
+                  </Td>
+                </Tr>
+              ))
+            }
           </Tbody>
         </Table>
       </Card>
