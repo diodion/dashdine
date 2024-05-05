@@ -15,13 +15,17 @@ const RelatoriosPage: React.FC = function () {
   const [earns, setEarns] = useState<number>();
 
   const handleGet = async (): Promise<void> => {
-    setGetting(true);
-    const salesResult = await getSales({dataFinal, dataInicial});
-    const earnsResult = await getEarns({dataFinal, dataInicial});
-
-    setSales(salesResult);
-    setEarns(earnsResult);
-    setGetting(false);
+    try {
+      setGetting(true);
+      const earnsResult = await getEarns({dataFinal, dataInicial});
+      setEarns(earnsResult);
+  
+      const salesResult = await getSales({dataFinal, dataInicial});
+      setSales(salesResult);
+      setGetting(false);
+    } catch (error){
+      setGetting(false);
+    }
   }
   return (
     <>
@@ -56,32 +60,33 @@ const RelatoriosPage: React.FC = function () {
           </Box>
         </HStack>
 
-        {
-          !!(earns && sales) &&
-          <>
-            <Table mt='32px'>
-              <Thead>
-                <Th>Produto</Th>
-                <Th>Valor</Th>
-              </Thead>
-              <Tbody>
-                {
-                  sales.map(s => (
-                    <Tr key={s.nome}>
-                      <Td>{s.nome}</Td>
-                      <Td>R${s.valor}</Td>
-                    </Tr>
-                  ))
-                }
-              </Tbody>
-            </Table>
+            {
+              !!sales &&
+              <Table mt='32px'>
+                <Thead>
+                  <Th>Produto</Th>
+                  <Th>Valor</Th>
+                </Thead>
+                <Tbody>
+                  {
+                    sales.map(s => (
+                      <Tr key={s.nome}>
+                        <Td>{s.nome}</Td>
+                        <Td>R${s.valor}</Td>
+                      </Tr>
+                    ))
+                  }
+                </Tbody>
+              </Table>
+            }
     
-            <Box mt='32px'>
-              <Heading as='h3' fontSize={'18px'}>Ganhos no período selecionado</Heading>
-              <Text color='green.500' fontWeight={'bold'} fontSize='24px'>R${earns}</Text>
-            </Box>
-          </>
-        }
+            {
+              !!earns &&
+              <Box mt='32px'>
+                <Heading as='h3' fontSize={'18px'}>Ganhos no período selecionado</Heading>
+                <Text color='green.500' fontWeight={'bold'} fontSize='24px'>R${earns.toFixed(2)}</Text>
+              </Box>
+            }
       </Card>
     </>
   )
