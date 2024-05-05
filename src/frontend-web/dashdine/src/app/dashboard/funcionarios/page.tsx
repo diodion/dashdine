@@ -30,11 +30,11 @@ const FuncionariosPage: React.FC = function () {
           <Tbody>
             {
               funcionarios?.map(f => (
-                <Tr>
-                  <Td>Antony</Td>
-                  <Td>mail@mail.com</Td>
-                  <Td>483578943</Td>
-                  <Td>Cargo</Td>
+                <Tr key={f.cpf}>
+                  <Td>{f.nome}</Td>
+                  <Td>{f.email}</Td>
+                  <Td>{f.cpf}</Td>
+                  <Td>{Object.keys(f.cargos).join(', ')}</Td>
                   <Td>
                     <HStack justifyContent={'flex-end'}>
                       <Button colorScheme='red'>Deletar</Button>
