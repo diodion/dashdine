@@ -22,7 +22,7 @@ const useRelatorios: UseRelatorios = () => {
   const getSales = async ({dataInicial, dataFinal}: GetDTO): Promise<Produto[]> => {
     const { data } = await api.get(`/relatorios/pedidos/vendas?dataInicial=${dataInicial}&dataFinal=${dataFinal}`)
     
-    return data;
+    return data.itensMaisVendidos.map((i: any) => i.itemId);
   }
 
   const getEarns = async ({dataInicial, dataFinal}: GetDTO): Promise<number> => {
